@@ -1,1 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+.text-tomato{
+    color:tomato !important
+}
+a.text-tomato:focus,
+a.text-tomato:hover{
+    color:rgb(250, 81, 51)!important
+}
+.btn-tomato{color:#fff;background-color:tomato;border-color:tomato}
+.btn-tomato:hover{color:#fff;background-color:rgb(248, 57, 24);border-color:tomato}
+.btn-tomato.focus,.btn-tomato:focus{box-shadow:0 0 0 .1rem rgb(248, 57, 24)}
+.btn-tomato.disabled,.btn-tomato:disabled{color:#fff;background-color:tomato;border-color:tomato}
+.btn-tomato:not(:disabled):not(.disabled).active,
+.btn-tomato:not(:disabled):not(.disabled):active,
+.show>.btn-tomato.dropdown-toggle{color:#fff;background-color:tomato;border-color:tomato}
+.btn-tomato:not(:disabled):not(.disabled).active:focus,
+.btn-tomato:not(:disabled):not(.disabled):active:focus,
+.show>.btn-tomato.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgb(250, 81, 51)}
+
+
+.btn-outline-tomato{color:#fff;border-color:tomato}
+.btn-outline-tomato:hover{color:#fff;background-color:tomato;border-color:tomato}
+.btn-outline-tomato.focus,
+.btn-outline-tomato:focus{box-shadow:0 0 0 .1rem rgba(255,99,71)}
+.btn-outline-tomato.disabled,
+.btn-outline-tomato:disabled{color:tomato;background-color:transparent}
+.btn-outline-tomato:not(:disabled):not(.disabled).active,
+.btn-outline-tomato:not(:disabled):not(.disabled):active,.show>
+.btn-outline-tomato.dropdown-toggle{color:#fff;background-color:tomato;border-color:tomato}
+.btn-outline-tomato:not(:disabled):not(.disabled).active:focus,
+.btn-outline-tomato:not(:disabled):not(.disabled):active:focus,.show>
+.btn-outline-tomato.dropdown-toggle:focus{box-shadow:0 0 0 .1rem rgba(255,99,71)}
+
+.badge-tomato{color:#212529;background-color:tomato}
+a.badge-tomato:focus,a.badge-tomato:hover{color:#212529;background-color:tomato}
+a.badge-tomato.focus,a.badge-tomato:focus{outline:0;box-shadow:0 0 0 .2rem rgba(255,99,71)}
+
+.shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 1) !important;
+  }
