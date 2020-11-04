@@ -1,0 +1,16 @@
+.container{
+    padding:1rem;
+}
+.top-button{
+    float: right;
+}
+.btn{
+    margin-left:1rem;
+}
+.top-title{
+    padding-left:0.8rem;
+    padding-right:0.8rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    border-bottom:0.2rem solid gray;
+}

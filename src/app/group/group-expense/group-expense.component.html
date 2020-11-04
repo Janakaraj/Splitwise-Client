@@ -1,0 +1,47 @@
+<div class="container">
+    <div>
+        <div class="top-title">
+            <h3>All Expenses
+                <span class="top-button">
+                    <a class="btn btn-tomato" [routerLink]="['/home/addExpense']">Add expense</a>
+                    <a class="btn btn-tomato">Settle Up</a>
+                </span>
+            </h3>
+        </div>
+    </div>
+   <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Splitby
+                </th>
+                <th>
+                    Description
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let expense of expenses">
+                <td>
+                    {{expense.expenseName | titlecase}}
+                </td>
+                <td>
+                    {{expense.expenseTotalAmount |  currency:'INR'}}
+                </td>
+                <td>
+                    {{expense.expenseSplitBy | titlecase}}
+                </td>
+                <td>
+                    {{expense.expenseDescription}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

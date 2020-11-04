@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ExpenseEditComponent } from './expense-edit/expense-edit.component';
+import { ExpenseEditComponent } from './expense/expense-edit/expense-edit.component';
 import { ExpenseAddComponent } from './expense/expense-add/expense-add.component';
 import { ExpenseListComponent } from './expense/expense-list/expense-list.component';
 import { GroupAddComponent } from './group/group-add/group-add.component';
@@ -13,6 +13,7 @@ import { RegisterComponent } from './user/register/register.component';
 import { UserAddComponent } from './user/user-add/user-add.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserListComponent } from './user/user-list/user-list.component';
+import { GroupExpenseComponent } from './group/group-expense/group-expense.component';
 
 
 const routes: Routes = [
@@ -28,7 +29,8 @@ const routes: Routes = [
       { path: 'editGroup/:id', component:GroupEditComponent},
       { path: 'addExpense', component: ExpenseAddComponent},
       { path: 'listExpense',component:ExpenseListComponent},
-      { path: 'editExpense/:id', component:ExpenseEditComponent}
+      { path: 'editExpense/:id', component:ExpenseEditComponent},
+      { path: 'groupExpenses/:id', component:GroupExpenseComponent}
     ]
   },
   { path: 'login', component: LoginComponent},

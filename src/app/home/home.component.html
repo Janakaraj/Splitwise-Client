@@ -6,9 +6,7 @@
             <div class="card" style="width: auto;">
                 <h6 class="card-title text-secondary">Groups <a [routerLink]="['/home/addGroup']"><span class="badge badge-secondary">+ add</span></a></h6>
                 <div class="card-body">
-                  <p class="card-subtitle mb-2 text-muted">Group 1</p>
-                  <p class="card-subtitle mb-2 text-muted">Group 2</p>
-                  <p class="card-subtitle mb-2 text-muted">Group 3</p>
+                  <p *ngFor="let group of groups" class="card-subtitle mb-2 text-muted"><a [routerLink]="['/home/groupExpenses',group.groupId]">{{group.groupName}}</a></p>
                 </div>
               </div>
               <div class="card" style="width: auto;">
