@@ -1,1 +1,22 @@
-<p>group-add works!</p>
+<div class="container">
+    <h2>Add new group</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form #form="ngForm">
+                <div class="form-group">
+                    <label for="GroupName" class="control-label">Group name</label>
+                    <input type="text" id="GroupName" name="GroupName" class="form-control" [(ngModel)]='groupData.groupName'
+                        required #groupName="ngModel" />
+                    <div class="alert-danger" *ngIf="groupName.errors && (groupName.dirty || groupName.touched)"
+                        style="padding:2px;">
+                        <span *ngIf="groupName.errors.required">Group name is required</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input [disabled]="!form.valid" class='btn btn-tomato' type="button" value="Add" (click)='add()'>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
