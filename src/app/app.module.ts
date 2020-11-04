@@ -17,7 +17,8 @@ import { GroupAddComponent } from './group/group-add/group-add.component';
 import { GroupEditComponent } from './group/group-edit/group-edit.component';
 import { ExpenseListComponent } from './expense/expense-list/expense-list.component';
 import { ExpenseAddComponent } from './expense/expense-add/expense-add.component';
-import { ExpenseEditComponent } from './expense-edit/expense-edit.component';
+import { ExpenseEditComponent } from './expense/expense-edit/expense-edit.component';
+import { GroupExpenseComponent } from './group/group-expense/group-expense.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ExpenseEditComponent } from './expense-edit/expense-edit.component';
     GroupEditComponent,
     ExpenseListComponent,
     ExpenseAddComponent,
-    ExpenseEditComponent
+    ExpenseEditComponent,
+    GroupExpenseComponent
   ],
   imports: [
     BrowserModule,
