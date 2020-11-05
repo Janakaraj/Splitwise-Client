@@ -26,7 +26,7 @@ export class GroupAddComponent implements OnInit {
   add() {
     this.groupData.groupCreatorId = this.groupCreatorId;
     this.group.init(this.groupData);
-    this.groupClient.groupPost(this.group).subscribe(result => {
+    this.groupClient.postGroup(this.group).subscribe(result => {
       console.log(result);
       this.router.navigate(['/']);
     },

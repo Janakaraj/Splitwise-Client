@@ -14,3 +14,16 @@
     padding-bottom: 0.6rem;
     border-bottom:0.2rem solid gray;
 }
+.expense-card{
+    font-size: 0.7rem;
+    width:100vh;
+}
+.expense-list-element:hover{
+    background-color:#ffe0cc;
+}
+.card-header{
+    background-color:#ffe0cc;
+}
+.card-td{
+    padding:0px !important;
+}

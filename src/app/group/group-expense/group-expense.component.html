@@ -1,16 +1,17 @@
 <div class="container">
     <div>
         <div class="top-title">
-            <h3>All Expenses
+            <h5>{{groupName}}
                 <span class="top-button">
-                    <a class="btn btn-tomato" [routerLink]="['/home/addExpense']">Add expense</a>
-                    <a class="btn btn-tomato">Settle Up</a>
+                    <a class="btn btn-tomato btn-sm" [routerLink]="['/home/addExpense']">Add expense</a>
+                    <a class="btn btn-tomato btn-sm">Settle Up</a>
                 </span>
-            </h3>
+            </h5>
         </div>
     </div>
-   <table class="table">
-        <thead>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
             <tr>
                 <th>
                     Name
@@ -24,24 +25,42 @@
                 <th>
                     Description
                 </th>
-                <th></th>
             </tr>
         </thead>
-        <tbody>
-            <tr *ngFor="let expense of expenses">
-                <td>
-                    {{expense.expenseName | titlecase}}
+            <tbody *ngFor="let expense of expenses"
+                (click)="showCard(expense.expenseId)">
+                <tr class="expense-list-element">
+                    <td>
+                        {{expense.expenseName | titlecase}}
+                    </td>
+                    <td>
+                        {{expense.expenseTotalAmount |  currency:'INR'}}
+                    </td>
+                    <td>
+                        {{expense.expenseSplitBy | titlecase}}
+                    </td>
+                    <td>
+                        {{expense.expenseDescription}}
+                    </td>
+                </tr>
+                <tr *ngIf="showIds.indexOf(expense.expenseId)!=-1">
+                    <td colspan="4"  class="card-td">
+                    <div class="card expense-card">
+                        <div class="card-header">
+                            <h6>{{expense.expenseName | titlecase}}</h6>
+                            <p>{{expense.expenseTotalAmount |  currency:'INR'}}</p>
+                            <p>Added by {{expense.expenseAdder.userFullName}}</p>
+                            <a class="badge badge-secondary"
+                                [routerLink]="['/home/editExpense',expense.expenseId]">edit</a>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title">{{expense.expenseName | titlecase}}</h6>
+                            <p class="card-text"> Split by {{expense.expenseSplitBy}}</p>
+                        </div>
+                    </div>
                 </td>
-                <td>
-                    {{expense.expenseTotalAmount |  currency:'INR'}}
-                </td>
-                <td>
-                    {{expense.expenseSplitBy | titlecase}}
-                </td>
-                <td>
-                    {{expense.expenseDescription}}
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
