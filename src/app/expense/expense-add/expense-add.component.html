@@ -1,1 +1,59 @@
-<p>expense-add works!</p>
+<div class="container">
+    <h2>Add new group</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form #form="ngForm">
+                <div class="form-group">
+                    <label for="ExpenseName" class="control-label">Expense name</label>
+                    <input type="text" id="ExpenseName" name="ExpenseName" class="form-control" [(ngModel)]='expense.expenseName'
+                        required #expenseName="ngModel" />
+                    <div class="alert-danger" *ngIf="expenseName.errors && (expenseName.dirty || expenseName.touched)"
+                        style="padding:2px;">
+                        <span *ngIf="expenseName.errors.required">Expense name is required</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ExpenseCurrency" class="control-label">Expense Currency</label>
+                    <input type="text" id="ExpenseCurrency" name="ExpenseCurrency" class="form-control" [(ngModel)]='expense.expenseCurrency'
+                        required #expenseCurrency="ngModel" />
+                    <div class="alert-danger" *ngIf="expenseCurrency.errors && (expenseCurrency.dirty || expenseCurrency.touched)"
+                        style="padding:2px;">
+                        <span *ngIf="expenseCurrency.errors.required">Expense Splitby is required</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ExpenseTotalAmount" class="control-label">Expense Total Amount</label>
+                    <input type="number" id="ExpenseTotalAmount" name="ExpenseTotalAmount" class="form-control" [(ngModel)]='expense.expenseTotalAmount'
+                        required #expenseTotalAmount="ngModel" />
+                    <div class="alert-danger" *ngIf="expenseTotalAmount.errors && (expenseTotalAmount.dirty || expenseTotalAmount.touched)"
+                        style="padding:2px;">
+                        <span *ngIf="expenseTotalAmount.errors.required">Expense Total Amount is required</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ExpenseDescription" class="control-label">Expense Description</label>
+                    <input type="text" id="ExpenseDescription" name="ExpenseDescription" class="form-control" [(ngModel)]='expense.expenseDescription'
+                        required #expenseDescription="ngModel" />
+                    <div class="alert-danger" *ngIf="expenseDescription.errors && (expenseDescription.dirty || expenseDescription.touched)"
+                        style="padding:2px;">
+                        <span *ngIf="expenseDescription.errors.required">Expense description is required</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ExpenseSplitBy" class="control-label">Expense SplitBy</label>
+                    <input type="text" id="ExpenseSplitBy" name="ExpenseSplitBy" class="form-control" [(ngModel)]='expense.expenseSplitBy'
+                        required #expenseSplitBy="ngModel" />
+                    <div class="alert-danger" *ngIf="expenseSplitBy.errors && (expenseSplitBy.dirty || expenseSplitBy.touched)"
+                        style="padding:2px;">
+                        <span *ngIf="expenseSplitBy.errors.required">Expense Splitby is required</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input [disabled]="!form.valid" class='btn btn-tomato' type="button" value="Add" (click)='add()'>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
