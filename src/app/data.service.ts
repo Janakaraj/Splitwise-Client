@@ -82,7 +82,7 @@ export class ExpenseClient {
         return _observableOf<ExpenseAC[]>(<any>null);
     }
 
-    getExpense(id: number): Observable<FileResponse | null> {
+    getExpense(id: number): Observable<ExpenseAC> {
         let url_ = this.baseUrl + "/api/Expense/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -93,7 +93,7 @@ export class ExpenseClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -104,34 +104,36 @@ export class ExpenseClient {
                 try {
                     return this.processGetExpense(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse | null>><any>_observableThrow(e);
+                    return <Observable<ExpenseAC>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse | null>><any>_observableThrow(response_);
+                return <Observable<ExpenseAC>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetExpense(response: HttpResponseBase): Observable<FileResponse | null> {
+    protected processGetExpense(response: HttpResponseBase): Observable<ExpenseAC> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ExpenseAC.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse | null>(<any>null);
+        return _observableOf<ExpenseAC>(<any>null);
     }
 
-    putExpense(id: number, expense: ExpenseAC): Observable<FileResponse | null> {
+    putExpense(id: number, expense: ExpenseAC): Observable<ExpenseAC> {
         let url_ = this.baseUrl + "/api/Expense/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -146,7 +148,7 @@ export class ExpenseClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -157,34 +159,36 @@ export class ExpenseClient {
                 try {
                     return this.processPutExpense(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse | null>><any>_observableThrow(e);
+                    return <Observable<ExpenseAC>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse | null>><any>_observableThrow(response_);
+                return <Observable<ExpenseAC>><any>_observableThrow(response_);
         }));
     }
 
-    protected processPutExpense(response: HttpResponseBase): Observable<FileResponse | null> {
+    protected processPutExpense(response: HttpResponseBase): Observable<ExpenseAC> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ExpenseAC.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse | null>(<any>null);
+        return _observableOf<ExpenseAC>(<any>null);
     }
 
-    deleteExpense(id: number): Observable<ExpenseAC> {
+    deleteExpense(id: number): Observable<number> {
         let url_ = this.baseUrl + "/api/Expense/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -206,14 +210,14 @@ export class ExpenseClient {
                 try {
                     return this.processDeleteExpense(<any>response_);
                 } catch (e) {
-                    return <Observable<ExpenseAC>><any>_observableThrow(e);
+                    return <Observable<number>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ExpenseAC>><any>_observableThrow(response_);
+                return <Observable<number>><any>_observableThrow(response_);
         }));
     }
 
-    protected processDeleteExpense(response: HttpResponseBase): Observable<ExpenseAC> {
+    protected processDeleteExpense(response: HttpResponseBase): Observable<number> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -224,7 +228,7 @@ export class ExpenseClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ExpenseAC.fromJS(resultData200);
+            result200 = resultData200 !== undefined ? resultData200 : <any>null;
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -232,7 +236,7 @@ export class ExpenseClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ExpenseAC>(<any>null);
+        return _observableOf<number>(<any>null);
     }
 
     postExpense(expense: ExpenseAC): Observable<ExpenseAC> {
@@ -745,7 +749,7 @@ export class PayeeClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44325";
     }
 
-    getPayeesByExpenseId(expenseId: number): Observable<UserAC[]> {
+    getPayeesByExpenseId(expenseId: number): Observable<PayeeAC[]> {
         let url_ = this.baseUrl + "/api/Payee/payeeByExpenseId/{expenseId}";
         if (expenseId === undefined || expenseId === null)
             throw new Error("The parameter 'expenseId' must be defined.");
@@ -767,14 +771,14 @@ export class PayeeClient {
                 try {
                     return this.processGetPayeesByExpenseId(<any>response_);
                 } catch (e) {
-                    return <Observable<UserAC[]>><any>_observableThrow(e);
+                    return <Observable<PayeeAC[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<UserAC[]>><any>_observableThrow(response_);
+                return <Observable<PayeeAC[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetPayeesByExpenseId(response: HttpResponseBase): Observable<UserAC[]> {
+    protected processGetPayeesByExpenseId(response: HttpResponseBase): Observable<PayeeAC[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -788,7 +792,7 @@ export class PayeeClient {
             if (Array.isArray(resultData200)) {
                 result200 = [] as any;
                 for (let item of resultData200)
-                    result200!.push(UserAC.fromJS(item));
+                    result200!.push(PayeeAC.fromJS(item));
             }
             return _observableOf(result200);
             }));
@@ -797,7 +801,7 @@ export class PayeeClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<UserAC[]>(<any>null);
+        return _observableOf<PayeeAC[]>(<any>null);
     }
 
     getExpensesByPayeeId(payeeId: string | null): Observable<ExpenseAC[]> {
@@ -1031,8 +1035,8 @@ export class PayerClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:44325";
     }
 
-    getPayersByExpenseId(expenseId: number): Observable<UserAC[]> {
-        let url_ = this.baseUrl + "/api/Payer/payerByExpenseId/{expenseId}";
+    getPayersByExpenseId(expenseId: number): Observable<PayerAC[]> {
+        let url_ = this.baseUrl + "/api/Payer/payersByExpenseId/{expenseId}";
         if (expenseId === undefined || expenseId === null)
             throw new Error("The parameter 'expenseId' must be defined.");
         url_ = url_.replace("{expenseId}", encodeURIComponent("" + expenseId));
@@ -1053,14 +1057,14 @@ export class PayerClient {
                 try {
                     return this.processGetPayersByExpenseId(<any>response_);
                 } catch (e) {
-                    return <Observable<UserAC[]>><any>_observableThrow(e);
+                    return <Observable<PayerAC[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<UserAC[]>><any>_observableThrow(response_);
+                return <Observable<PayerAC[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetPayersByExpenseId(response: HttpResponseBase): Observable<UserAC[]> {
+    protected processGetPayersByExpenseId(response: HttpResponseBase): Observable<PayerAC[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1074,7 +1078,7 @@ export class PayerClient {
             if (Array.isArray(resultData200)) {
                 result200 = [] as any;
                 for (let item of resultData200)
-                    result200!.push(UserAC.fromJS(item));
+                    result200!.push(PayerAC.fromJS(item));
             }
             return _observableOf(result200);
             }));
@@ -1083,11 +1087,11 @@ export class PayerClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<UserAC[]>(<any>null);
+        return _observableOf<PayerAC[]>(<any>null);
     }
 
     getExpensesByPayerId(payerId: string | null): Observable<ExpenseAC[]> {
-        let url_ = this.baseUrl + "/api/Payer/expenseByPayerId/{payerId}";
+        let url_ = this.baseUrl + "/api/Payer/expensesByPayerId/{payerId}";
         if (payerId === undefined || payerId === null)
             throw new Error("The parameter 'payerId' must be defined.");
         url_ = url_.replace("{payerId}", encodeURIComponent("" + payerId));

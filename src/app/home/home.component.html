@@ -6,13 +6,13 @@
             <div class="card" style="width: auto;">
                 <h6 class="card-title text-secondary">Groups <a [routerLink]="['/home/addGroup']"><span class="badge badge-secondary">+ add</span></a></h6>
                 <div class="card-body">
-                  <p *ngFor="let group of groups" class="card-subtitle mb-2 text-muted"><a [routerLink]="['/home/groupExpenses',group.groupId]">{{group.groupName}}</a></p>
+                  <p *ngFor="let group of groups" class="card-subtitle mb-2"><a class="text-tomato" [routerLink]="['/home/groupExpenses',group.groupId]">{{group.groupName}}</a></p>
                 </div>
               </div>
               <div class="card" style="width: auto;">
               <h6 class="card-title text-secondary">Friends <a [routerLink]="['/home/addGroup']"><span class="badge badge-secondary">+ add</span></a></h6>
                 <div class="card-body">
-                  <p *ngFor="let friend of friends" class="card-subtitle mb-2 text-muted"><a>{{friend.userName}}</a></p>
+                  <p *ngFor="let friend of friends" class="card-subtitle mb-2 text-muted"><a class="text-tomato">{{friend.userName}}</a></p>
                 </div>
               </div>
         </div>

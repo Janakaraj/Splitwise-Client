@@ -3,7 +3,7 @@
         <div class="top-title">
             <h5>{{groupName}}
                 <span class="top-button">
-                    <a class="btn btn-tomato btn-sm" [routerLink]="['/home/addExpense']">Add expense</a>
+                    <a class="btn btn-tomato btn-sm" [routerLink]="['/home/addExpense',groupId]">Add expense</a>
                     <a class="btn btn-tomato btn-sm">Settle Up</a>
                 </span>
             </h5>
@@ -47,15 +47,19 @@
                     <td colspan="4"  class="card-td">
                     <div class="card expense-card">
                         <div class="card-header">
-                            <h6>{{expense.expenseName | titlecase}}</h6>
+                            <h6>{{expense.expenseName | titlecase}} <span class="expense-description"> - {{expense.expenseDescription}}</span></h6>
                             <p>{{expense.expenseTotalAmount |  currency:'INR'}}</p>
                             <p>Added by {{expense.expenseAdder.userFullName}}</p>
                             <a class="badge badge-secondary"
                                 [routerLink]="['/home/editExpense',expense.expenseId]">edit</a>
                         </div>
                         <div class="card-body">
-                            <h6 class="card-title">{{expense.expenseName | titlecase}}</h6>
-                            <p class="card-text"> Split by {{expense.expenseSplitBy}}</p>
+                            <div *ngFor="let payer of payers">
+                            <p class="col card-text"> {{payer.payerUser.userFullName | titlecase}} <span class="text-success">paid {{payer.amountPaid | currency:'INR'}}</span> and <span class="text-tomato">owes {{payer.payerShare | currency:'INR'}}</span></p>
+                            </div>
+                            <div *ngFor="let payee of payees">
+                                <p class="col card-text"> {{payee.payeeUser.userFullName | titlecase}} owes <span class="text-tomato">{{payee.payeeShare | currency:'INR'}}</span></p>
+                                </div>
                         </div>
                     </div>
                 </td>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ExpenseAC, ExpenseClient, GroupClient } from 'src/app/data.service';
+import { ExpenseAC, ExpenseClient, GroupClient, PayeeAC, PayeeClient, PayerAC, PayerClient, UserAC } from 'src/app/data.service';
 
 @Component({
   selector: 'app-group-expense',
@@ -10,9 +10,13 @@ import { ExpenseAC, ExpenseClient, GroupClient } from 'src/app/data.service';
 export class GroupExpenseComponent implements OnInit {
 
 
-  constructor(private expenseClient: ExpenseClient, private groupClient: GroupClient, private activatedRoute: ActivatedRoute) { }
+  constructor(private expenseClient: ExpenseClient, private groupClient: GroupClient,
+     private activatedRoute: ActivatedRoute, private payeeClient: PayeeClient, 
+     private payerClient: PayerClient) { }
 
   expenses: ExpenseAC[];
+  payers : PayerAC[];
+  payees : PayeeAC[];
   groupId: number;
   showIds: number[] = [];
   groupName: string = "";
@@ -40,6 +44,13 @@ export class GroupExpenseComponent implements OnInit {
     else {
       this.showIds.push(id);
     }
+    this.payerClient.getPayersByExpenseId(id).subscribe(result => {
+      this.payers=result;
+    },
+    error=>console.error(error));
+    this.payeeClient.getPayeesByExpenseId(id).subscribe(result =>{
+      this.payees=result;
+    });
   }
   getGroupName(id: number) {
     this.groupClient.getGroup(id).subscribe(result => {
