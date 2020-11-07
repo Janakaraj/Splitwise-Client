@@ -1,0 +1,12 @@
+.container{
+    padding:1rem;
+    margin:1rem;
+}
+h5, p{
+    text-align: center !important;
+}
+.footer{
+    font-size:0.7rem;
+    position: absolute;
+    bottom: 2rem;
+}
