@@ -14,28 +14,30 @@ import { UserAddComponent } from './user/user-add/user-add.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { GroupExpenseComponent } from './group/group-expense/group-expense.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 const routes: Routes = [
   {
     path: 'home', component: HomeComponent, children: [
-      { path:'',redirectTo:'dashboard',pathMatch:'full'},
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'addUser', component: UserAddComponent},
-      { path: 'listUser',component:UserListComponent},
-      { path: 'editUser/:id',component:UserEditComponent},
-      { path: 'addGroup', component: GroupAddComponent},
-      { path: 'listGroup',component:GroupListComponent},
-      { path: 'editGroup/:id', component:GroupEditComponent},
-      { path: 'addExpense/:id', component: ExpenseAddComponent},
-      { path: 'listExpense',component:ExpenseListComponent},
-      { path: 'editExpense/:id', component:ExpenseEditComponent},
-      { path: 'groupExpenses/:id', component:GroupExpenseComponent}
+      { path: 'addUser', component: UserAddComponent },
+      { path: 'listUser/:id', component: UserListComponent, outlet: "right" },
+      { path: 'editUser/:id', component: UserEditComponent },
+      { path: 'addGroup',component: GroupAddComponent, outlet: "right" },
+      {path: 'welcome',component:WelcomeComponent, outlet:"right"},
+      { path: 'listGroup', component: GroupListComponent },
+      { path: 'editGroup/:id', component: GroupEditComponent },
+      { path: 'addExpense/:id', component: ExpenseAddComponent },
+      { path: 'listExpense', component: ExpenseListComponent },
+      { path: 'editExpense/:id', component: ExpenseEditComponent },
+      { path: 'groupExpenses/:id', component: GroupExpenseComponent }
     ]
   },
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: '', redirectTo: '/home', pathMatch: 'full'}
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({
