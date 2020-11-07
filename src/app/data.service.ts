@@ -2282,6 +2282,7 @@ export class ExpenseAC implements IExpenseAC {
     expenseSplitBy?: string | undefined;
     expenseDescription?: string | undefined;
     expenseCurrency?: string | undefined;
+    expenseAddTimeStamp?: string | undefined;
     expenseAdderId?: string | undefined;
     expenseAdder?: UserAC | undefined;
 
@@ -2304,6 +2305,7 @@ export class ExpenseAC implements IExpenseAC {
             this.expenseSplitBy = _data["expenseSplitBy"];
             this.expenseDescription = _data["expenseDescription"];
             this.expenseCurrency = _data["expenseCurrency"];
+            this.expenseAddTimeStamp = _data["expenseAddTimeStamp"];
             this.expenseAdderId = _data["expenseAdderId"];
             this.expenseAdder = _data["expenseAdder"] ? UserAC.fromJS(_data["expenseAdder"]) : <any>undefined;
         }
@@ -2326,6 +2328,7 @@ export class ExpenseAC implements IExpenseAC {
         data["expenseSplitBy"] = this.expenseSplitBy;
         data["expenseDescription"] = this.expenseDescription;
         data["expenseCurrency"] = this.expenseCurrency;
+        data["expenseAddTimeStamp"] = this.expenseAddTimeStamp;
         data["expenseAdderId"] = this.expenseAdderId;
         data["expenseAdder"] = this.expenseAdder ? this.expenseAdder.toJSON() : <any>undefined;
         return data; 
@@ -2341,6 +2344,7 @@ export interface IExpenseAC {
     expenseSplitBy?: string | undefined;
     expenseDescription?: string | undefined;
     expenseCurrency?: string | undefined;
+    expenseAddTimeStamp?: string | undefined;
     expenseAdderId?: string | undefined;
     expenseAdder?: UserAC | undefined;
 }

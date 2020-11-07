@@ -19,6 +19,7 @@ import { ExpenseListComponent } from './expense/expense-list/expense-list.compon
 import { ExpenseAddComponent } from './expense/expense-add/expense-add.component';
 import { ExpenseEditComponent } from './expense/expense-edit/expense-edit.component';
 import { GroupExpenseComponent } from './group/group-expense/group-expense.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { GroupExpenseComponent } from './group/group-expense/group-expense.compo
     ExpenseListComponent,
     ExpenseAddComponent,
     ExpenseEditComponent,
-    GroupExpenseComponent
+    GroupExpenseComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

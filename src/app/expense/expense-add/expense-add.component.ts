@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ExpenseAC, ExpenseClient } from 'src/app/data.service';
 
 @Component({
@@ -19,9 +19,10 @@ export class ExpenseAddComponent implements OnInit {
     expenseSplitBy: null,
     expenseDescription: null,
     expenseCurrency: null,
+    expenseAddTimeStamp:null,
     expenseAdderId: this.expenseAdderId,
   };
-  constructor(private expenseClient: ExpenseClient, private activatedRoute: ActivatedRoute) { }
+  constructor(private expenseClient: ExpenseClient, private activatedRoute: ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(e => {
@@ -31,10 +32,14 @@ export class ExpenseAddComponent implements OnInit {
   }
   add(){
     this.expense.expenseGroupId = this.groupId;
+    var date = new Date();
+    this.expense.expenseAddTimeStamp = date.getTime().toString();
     this.expenseToUpdate.init(this.expense);
     this.expenseClient.postExpense(this.expenseToUpdate).subscribe(
       result =>{
         console.log("Expennse Added");
+        var id = this.groupId.toString();
+        this.router.navigate([`/home/groupExpenses/${id}`]);
       },
       error=>console.error(error)
     );

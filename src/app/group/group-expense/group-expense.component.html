@@ -12,23 +12,22 @@
     <div class="table-responsive">
         <table class="table">
             <thead>
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Amount
-                </th>
-                <th>
-                    Splitby
-                </th>
-                <th>
-                    Description
-                </th>
-            </tr>
-        </thead>
-            <tbody *ngFor="let expense of expenses"
-                (click)="showCard(expense.expenseId)">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                    <th>
+                        Splitby
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let expense of expenses" (click)="showCard(expense.expenseId)">
                 <tr class="expense-list-element">
                     <td>
                         {{expense.expenseName | titlecase}}
@@ -44,25 +43,30 @@
                     </td>
                 </tr>
                 <tr *ngIf="showIds.indexOf(expense.expenseId)!=-1">
-                    <td colspan="4"  class="card-td">
-                    <div class="card expense-card">
-                        <div class="card-header">
-                            <h6>{{expense.expenseName | titlecase}} <span class="expense-description"> - {{expense.expenseDescription}}</span></h6>
-                            <p>{{expense.expenseTotalAmount |  currency:'INR'}}</p>
-                            <p>Added by {{expense.expenseAdder.userFullName}}</p>
-                            <a class="badge badge-secondary"
-                                [routerLink]="['/home/editExpense',expense.expenseId]">edit</a>
-                        </div>
-                        <div class="card-body">
-                            <div *ngFor="let payer of payers">
-                            <p class="col card-text"> {{payer.payerUser.userFullName | titlecase}} <span class="text-success">paid {{payer.amountPaid | currency:'INR'}}</span> and <span class="text-tomato">owes {{payer.payerShare | currency:'INR'}}</span></p>
+                    <td colspan="4" class="card-td">
+                        <div class="card expense-card">
+                            <div class="card-header">
+                                <h6>{{expense.expenseName | titlecase}} <span class="expense-description"> -
+                                        {{expense.expenseDescription}}</span></h6>
+                                <p>{{expense.expenseTotalAmount |  currency:'INR'}}</p>
+                                <p>Added by <span class="text-tomato">{{expense.expenseAdder.userFullName}}</span> on
+                                    {{expense.expenseAddTimeStamp |  date:'medium'}}</p>
+                                <a class="badge badge-secondary" [routerLink]="['/home/editExpense',expense.expenseId]">
+                                    ✍️ edit</a>
                             </div>
-                            <div *ngFor="let payee of payees">
-                                <p class="col card-text"> {{payee.payeeUser.userFullName | titlecase}} owes <span class="text-tomato">{{payee.payeeShare | currency:'INR'}}</span></p>
+                            <div class="card-body">
+                                <div *ngFor="let payer of payers">
+                                    <p class="col card-text"> {{payer.payerUser.userFullName | titlecase}} <span
+                                            class="text-success">paid {{payer.amountPaid | currency:'INR'}}</span> and
+                                        <span class="text-tomato">owes {{payer.payerShare | currency:'INR'}}</span></p>
                                 </div>
+                                <div *ngFor="let payee of payees">
+                                    <p class="col card-text"> {{payee.payeeUser.userFullName | titlecase}} owes <span
+                                            class="text-tomato">{{payee.payeeShare | currency:'INR'}}</span></p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </td>
+                    </td>
                 </tr>
             </tbody>
         </table>
