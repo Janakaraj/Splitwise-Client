@@ -9,7 +9,7 @@ import { FriendClient, GroupAC, UserAC, UserGroupClient } from '../data.service'
 export class HomeComponent implements OnInit {
   groups: GroupAC[];
   friends: UserAC[];
-  userid: string = "ab9e1498-cf3a-4044-8e97-357d0df3d488";
+  userid: string = localStorage.getItem("userId");
   constructor(private usergroupClient: UserGroupClient, private friendClient: FriendClient) { }
   ngOnInit(): void {
     this.getGroupsByUserId(this.userid);

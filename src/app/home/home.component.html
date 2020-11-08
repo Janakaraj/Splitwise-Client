@@ -4,7 +4,7 @@
             <h6 class="card-title"><a class="text-secondary" [routerLink]="[{outlets:{primary: ['dashboard'], right:['welcome']}}]">DashBoard</a></h6>
             <h6 class="card-title"><a class="text-secondary" [routerLink]="['/home/listExpense']">All Expense</a></h6>
             <div class="card" style="width: auto;">
-                <h6 class="card-title text-secondary">Groups<a [routerLink]="['/home/addGroup']"><span class="badge badge-secondary">➕ add</span></a></h6>
+                <h6 class="card-title text-secondary">Groups<a [routerLink]="[{outlets:{primary: ['addGroup'], right:['welcome']}}]"><span class="badge badge-secondary">➕ add</span></a></h6>
                 <div class="card-body">
                   <p *ngFor="let group of groups" class="card-subtitle mb-2"><a class="text-tomato" [routerLink]="[{outlets: {primary: ['groupExpenses',group.groupId], right: ['listUser',group.groupId]}}]">{{group.groupName}}</a></p>
                 </div>

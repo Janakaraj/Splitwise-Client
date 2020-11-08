@@ -17,7 +17,7 @@ export class GroupAddComponent implements OnInit {
     groupCreatorId: null,
     groupCreator: null
   };
-  groupCreatorId: string = "ab9e1498-cf3a-4044-8e97-357d0df3d488";
+  groupCreatorId: string = localStorage.getItem("userId");
   constructor(private groupClient: GroupClient, private router:Router) {
   }
 

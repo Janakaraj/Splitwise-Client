@@ -1742,7 +1742,7 @@ export class UserClient {
         return _observableOf<FileResponse | null>(<any>null);
     }
 
-    login(model: LoginUserAC): Observable<FileResponse | null> {
+    login(model: LoginUserAC): Observable<TokenAC> {
         let url_ = this.baseUrl + "/api/User/login";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1754,7 +1754,7 @@ export class UserClient {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -1765,31 +1765,33 @@ export class UserClient {
                 try {
                     return this.processLogin(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse | null>><any>_observableThrow(e);
+                    return <Observable<TokenAC>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse | null>><any>_observableThrow(response_);
+                return <Observable<TokenAC>><any>_observableThrow(response_);
         }));
     }
 
-    protected processLogin(response: HttpResponseBase): Observable<FileResponse | null> {
+    protected processLogin(response: HttpResponseBase): Observable<TokenAC> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = TokenAC.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse | null>(<any>null);
+        return _observableOf<TokenAC>(<any>null);
     }
 
     getUsers(): Observable<UserAC[]> {
@@ -2759,6 +2761,46 @@ export interface IRegisterUserAC {
     userPassword?: string | undefined;
     userName?: string | undefined;
     userFullName?: string | undefined;
+}
+
+export class TokenAC implements ITokenAC {
+    token?: string | undefined;
+    expiration!: Date;
+
+    constructor(data?: ITokenAC) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.token = _data["token"];
+            this.expiration = _data["expiration"] ? new Date(_data["expiration"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): TokenAC {
+        data = typeof data === 'object' ? data : {};
+        let result = new TokenAC();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["token"] = this.token;
+        data["expiration"] = this.expiration ? this.expiration.toISOString() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface ITokenAC {
+    token?: string | undefined;
+    expiration: Date;
 }
 
 export class LoginUserAC implements ILoginUserAC {
