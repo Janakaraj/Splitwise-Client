@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { UserAC, UserGroupClient } from 'src/app/data.service';
 
 @Component({
@@ -7,15 +8,19 @@ import { UserAC, UserGroupClient } from 'src/app/data.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  users: UserAC[];
-
-  constructor(usergroupClient : UserGroupClient) { 
-    usergroupClient.userbygroupid(2).subscribe(result => {
-      this.users = result;
-      console.log(this.users);
-    },
-    error => console.error(error));
-  }
+  groupId: number = 0;
+  groupMembers: UserAC[];
+  constructor(private userGroupClient: UserGroupClient, private activatedRoute: ActivatedRoute) { }
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(e => {
+      this.groupId = +e.get('id');
+      this.getGroupMembers(this.groupId);
+    });
+  }
+  getGroupMembers(id: number) {
+    this.userGroupClient.getUsersInGroup(id).subscribe(result => {
+      this.groupMembers = result;
+    },
+      error => console.error(error));
   }
 }

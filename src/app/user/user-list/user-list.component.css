@@ -1,0 +1,12 @@
+.title{
+    margin-top:1rem;
+    margin-bottom: 1rem;
+    padding:0.5rem;
+    background-color:  #ffe0cc;
+    border-left:0.3rem solid tomato;
+}
+.card-title{
+    border-bottom: 0.1rem solid tomato;
+    padding-top:0.3rem;
+    padding-bottom:0.3rem;
+}

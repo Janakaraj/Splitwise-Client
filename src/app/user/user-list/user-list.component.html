@@ -1,1 +1,10 @@
-<p>user-list works!</p>
+<div class="container">
+  <h5 class="title">Group Balance</h5>
+  <div class="card">
+    <div class="card-body">
+      <h6 class="card-title text-muted">Members :</h6>
+      <p *ngFor="let member of groupMembers" class="card-subtitle mb-2 text-muted"><a
+          class="text-tomato">{{member.userName}}</a></p>
+    </div>
+  </div>
+</div>

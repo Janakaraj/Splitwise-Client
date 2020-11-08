@@ -1,9 +1,12 @@
-.container{
-    padding:1rem;
-    margin:1rem;
-}
 h5, p{
     text-align: center !important;
+}
+h5{
+    margin-top:1rem;
+    margin-bottom: 1rem;
+    padding:0.5rem;
+    background-color:  #ffe0cc;
+    border:0.1rem solid tomato;
 }
 .footer{
     font-size:0.7rem;
