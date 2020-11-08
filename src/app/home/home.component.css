@@ -25,3 +25,9 @@
 .card-subtitle{
     font-style: italic;
 }
+.fa-list{
+    float:right;
+    color: gray;
+    padding:0.1rem;
+    margin:0.1rem;
+}

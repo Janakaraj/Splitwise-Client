@@ -41,3 +41,6 @@ a.badge-tomato.focus,a.badge-tomato:focus{outline:0;box-shadow:0 0 0 .2rem rgba(
 body{
     font-size: 0.8rem;
 }
+.badge{
+    font-size: 0.7rem;
+}

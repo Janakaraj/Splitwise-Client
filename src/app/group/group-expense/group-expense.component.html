@@ -52,7 +52,7 @@
                                 <p>Added by <span class="text-tomato">{{expense.expenseAdder.userFullName}}</span> on
                                     {{expense.expenseAddTimeStamp |  date:'medium'}}</p>
                                 <a class="badge badge-secondary" [routerLink]="['/home/editExpense',expense.expenseId]">
-                                    ✍️ edit</a>
+                                    <i class="fa fa-edit"></i> edit</a>
                             </div>
                             <div class="card-body">
                                 <div *ngFor="let payer of payers">

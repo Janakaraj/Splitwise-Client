@@ -1,33 +1,46 @@
 <div class="container">
     <h1>User Login</h1>
 
-<div class="row">
-    <div class="col-md-12">
-        <form #form="ngForm">
-            <div class="form-group">
-                <label for="Email" class="control-label">Email</label>
-                <input for="Email" id="Email" name="Email" class="form-control" [(ngModel)]='loginDetails.userEmail'
-                    required pattern="[^ @]*@[^ @]*" #email="ngModel" />
-                    <div class="alert-danger" *ngIf="email.errors && (email.dirty || email.touched)" style="padding:2px;">
+    <div class="row">
+        <div class="col-md-12">
+            <form #form="ngForm">
+                <div class="form-group">
+                    <label for="Email" class="control-label">Email</label>
+                    <input for="Email" id="Email" name="Email" class="form-control" [(ngModel)]='loginDetails.userEmail'
+                        required pattern="[^ @]*@[^ @]*" #email="ngModel" />
+                    <div class="alert-danger" *ngIf="email.errors && (email.dirty || email.touched)"
+                        style="padding:2px;">
                         <span *ngIf="email.errors.required">Email is required</span>
                         <span *ngIf="email.errors.pattern">Email formate is not valid</span>
                     </div>
-            </div>
-            <div class="form-group">
-                <label for="Name" class="control-label">Password</label>
-                <input type="password" id="Name" name="Name" class="form-control" [(ngModel)]='loginDetails.userPassword'
-                    required #pass="ngModel" />
+                </div>
+                <div class="form-group">
+                    <label for="Name" class="control-label">Password</label>
+                    <div class="input-group">
+                        <input [type]="fieldTextType ? 'text' : 'password'" id="Name" name="Name" class="form-control"
+                            [(ngModel)]='loginDetails.userPassword' required #pass="ngModel" />
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fa" [ngClass]="{
+                                  'fa-eye-slash': !fieldTextType,
+                                  'fa-eye': fieldTextType
+                                }" (click)="toggleFieldTextType()"></i>
+                            </span>
+                        </div>
+                    </div>
+
                     <div class="alert-danger" *ngIf="pass.errors && (pass.dirty || pass.touched)" style="padding:2px;">
                         <span *ngIf="pass.errors.required">Password is required</span>
                     </div>
+                </div>
+                <div class="form-group">
+                    <input [disabled]="!form.valid" class='btn btn-tomato btun' type="submit" value="Login"
+                        (click)='login()'>
+                </div>
+            </form>
+            <div>
+                <a [routerLink]="['/forgotPassword']">Forgot Password?</a>
             </div>
-            <div class="form-group">
-                <input [disabled]="!form.valid" class='btn btn-tomato btun' type="submit" value="Login" (click)='login()'>
-            </div>
-        </form>
-        <div>
-            <a [routerLink]="['/forgotPassword']">Forgot Password?</a>
         </div>
     </div>
-</div>
 </div>

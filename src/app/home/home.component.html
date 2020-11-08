@@ -2,17 +2,17 @@
     <div class="row">
         <div class="col-md-3" style="height: 90vh;">
             <h6 class="card-title"><a class="text-secondary" [routerLink]="[{outlets:{primary: ['dashboard'], right:['welcome']}}]">DashBoard</a></h6>
-            <h6 class="card-title"><a class="text-secondary" [routerLink]="['/home/listExpense']">All Expense</a></h6>
+            <h6 class="card-title"><a class="text-secondary" [routerLink]="['/home/listExpense']">All Expense</a> <i class="fa fa-list"></i></h6>
             <div class="card" style="width: auto;">
-                <h6 class="card-title text-secondary">Groups<a [routerLink]="[{outlets:{primary: ['addGroup'], right:['welcome']}}]"><span class="badge badge-secondary">➕ add</span></a></h6>
+                <h6 class="card-title text-secondary"> Groups <a [routerLink]="[{outlets:{primary: ['addGroup'], right:['welcome']}}]"><span class="badge badge-secondary"><i class="fa fa-plus-square"></i> add</span></a></h6>
                 <div class="card-body">
-                  <p *ngFor="let group of groups" class="card-subtitle mb-2"><a class="text-tomato" [routerLink]="[{outlets: {primary: ['groupExpenses',group.groupId], right: ['listUser',group.groupId]}}]">{{group.groupName}}</a></p>
+                  <p *ngFor="let group of groups" class="card-subtitle mb-2"><a class="text-tomato" [routerLink]="[{outlets: {primary: ['groupExpenses',group.groupId], right: ['listUser',group.groupId]}}]"><i class="fa fa-users"></i>&nbsp;&nbsp; {{group.groupName}}</a></p>
                 </div>
               </div>
               <div class="card" style="width: auto;">
-              <h6 class="card-title text-secondary">Friends <a [routerLink]="['/home/addGroup']"><span class="badge badge-secondary">➕ add</span></a></h6>
+              <h6 class="card-title text-secondary">Friends <a [routerLink]="['/home/addGroup']"><span class="badge badge-secondary"><i class="fa fa-user-plus"></i> add</span></a></h6>
                 <div class="card-body">
-                  <p *ngFor="let friend of friends" class="card-subtitle mb-2 text-muted"><a class="text-tomato">{{friend.userName}}</a></p>
+                  <p *ngFor="let friend of friends" class="card-subtitle mb-2 text-muted"><a class="text-tomato"><i class="fa fa-user"></i>&nbsp;&nbsp; {{friend.userName}}</a></p>
                 </div>
               </div>
         </div>
