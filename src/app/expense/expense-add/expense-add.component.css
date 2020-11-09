@@ -1,0 +1,13 @@
+.selection{
+    background-color: tomato;
+}
+.badge-success{
+    margin-right: 0.1rem;
+    margin-left: 0.1rem;
+}
+.card-body{
+    padding:0.2rem !important;
+}
+.card-body:hover{
+    background-color: #ffe0cc;
+}
