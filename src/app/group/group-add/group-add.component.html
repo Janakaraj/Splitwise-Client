@@ -2,7 +2,7 @@
     <h2>Add new group</h2>
     <hr />
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-8">
             <form #form="ngForm">
                 <div class="form-group">
                     <label for="GroupName" class="control-label">Group name</label>
@@ -13,6 +13,19 @@
                         <span *ngIf="groupName.errors.required">Group name is required</span>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="GroupMembers" class="control-label"> Choose Group Members</label>
+                    <div>
+                        <span *ngFor="let member of groupMembers"
+                            class="badge badge-success">{{member.userName}}&nbsp;<a (click)="selectSuggestion(member)"><i class="fa fa-times" ></i></a></span>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body" *ngFor="let friend of friends" [ngClass]="isSelected(friend) ? 'selection' : ''"><a
+                                (click)="selectSuggestion(friend)">{{friend.userFullName}}</a></div>
+                    </div>
+                </div>
+                
                 <div class="form-group">
                     <input [disabled]="!form.valid" class='btn btn-tomato' type="button" value="Add" (click)='add()'>
                 </div>
