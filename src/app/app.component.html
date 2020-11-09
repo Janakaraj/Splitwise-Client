@@ -8,11 +8,11 @@
           </ul>
           <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                  <span class="nav-link"><i class="fa fa-user-circle">&nbsp;&nbsp;</i>{{userName | titlecase}}</span>
+                  <span *ngIf='loggedIn' class="nav-link"><i class="fa fa-user-circle">&nbsp;&nbsp;</i>{{userName | titlecase}}</span>
               </li>
               <li class="nav-item">
                   <a *ngIf='!loggedIn' class="btn btn-outline-tomato btn-sm" style="margin-left:5px;margin-right:5px"
-                      [routerLink]="['/login']">Login</a>
+                      [routerLink]="['/login']">Login &nbsp;<i class="fa fa-sign-in text-tomato"></i></a>
                   <a *ngIf='loggedIn' class="btn btn-outline-tomato btn-sm" style="margin-left:5px;margin-right:5px"
                       (click)="logout()">Logout</a>
                  <a *ngIf='!loggedIn' class="btn btn-outline-tomato btn-sm" style="margin-left:5px;margin-right:5px"

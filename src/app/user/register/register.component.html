@@ -1,13 +1,16 @@
 <div class="container">
-    <h2>Register User</h2>
+    <h3 class="text-muted">Register User &nbsp;<i class="fa fa-address-card text-tomato"></i></h3>
     <hr />
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-10">
             <form #form="ngForm">
                 <div class="form-group">
                     <label for="Email" class="control-label">Email</label>
-                    <input for="Email" id="Email" name="Email" class="form-control" [(ngModel)]='user.email' required
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-envelope"></i></span></div>
+                        <input for="Email" id="Email" name="Email" class="form-control" [(ngModel)]='user.userEmail' required
                         pattern="[^ @]*@[^ @]*" #email="ngModel" />
+                    </div>
                     <div class="alert-danger" *ngIf="email.errors && (email.dirty || email.touched)"
                         style="padding:2px;">
                         <span *ngIf="email.errors.required">Email is required</span>
@@ -16,8 +19,11 @@
                 </div>
                 <div class="form-group">
                     <label for="UserName" class="control-label">User name</label>
-                    <input type="text" id="UserName" name="UserName" class="form-control" [(ngModel)]='user.username'
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user"></i></span></div>
+                    <input type="text" id="UserName" name="UserName" class="form-control" [(ngModel)]='user.userName'
                         required #username="ngModel" />
+                    </div>
                     <div class="alert-danger" *ngIf="username.errors && (username.dirty || username.touched)"
                         style="padding:2px;">
                         <span *ngIf="username.errors.required">User name is required</span>
@@ -25,8 +31,11 @@
                 </div>
                 <div class="form-group">
                     <label for="Fullname" class="control-label">Full name</label>
-                    <input type="text" id="Fullname" name="Fullname" class="form-control" [(ngModel)]='user.fullname'
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-address-book"></i></span></div>
+                    <input type="text" id="Fullname" name="Fullname" class="form-control" [(ngModel)]='user.userFullName'
                         required #fullname="ngModel" />
+                    </div>
                     <div class="alert-danger" *ngIf="fullname.errors && (fullname.dirty || fullname.touched)"
                         style="padding:2px;">
                         <span *ngIf="fullname.errors.required">Full name is required</span>
@@ -34,23 +43,55 @@
                 </div>
                 <div class="form-group">
                     <label for="Password" class="control-label">Password</label>
-                    <input type="password" id="Password" name="Password" class="form-control"
-                        [(ngModel)]='user.password' required #password="ngModel" />
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-key"></i></span></div>
+                        <input [type]="fieldTextType ? 'text' : 'password'" id="Password" name="Password"
+                        class="form-control" [(ngModel)]='user.userPassword' required #password="ngModel">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fa" [ngClass]="{
+                                  'fa-eye-slash': !fieldTextType,
+                                  'fa-eye': fieldTextType
+                                }" (click)="toggleFieldTextType()"></i>
+                        </span>
+                    </div>
+                    </div>
                     <div class="alert-danger" *ngIf="password.errors && (password.dirty || password.touched)"
                         style="padding:2px;">
                         <span *ngIf="password.errors.required">Password is required</span>
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="ConfirmPassword" class="control-label">Confirm Password</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-key"></i></span></div>
+                        <input [type]="fieldTextType ? 'text' : 'password'" id="ConfirmPassword" name="ConfirmPassword"
+                        class="form-control" [(ngModel)]='confirmPassword' required #cpassword="ngModel">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fa" [ngClass]="{
+                                  'fa-eye-slash': !fieldTextType,
+                                  'fa-eye': fieldTextType
+                                }" (click)="toggleFieldTextType()"></i>
+                        </span>
+                    </div>
+                    </div>
+                    <div class="alert-danger" *ngIf="cpassword.errors && (cpassword.dirty || cpassword.touched)"
+                        style="padding:2px;">
+                        <span *ngIf="cpassword.errors.required">Password is required</span>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
                     <label for="ContactNumber" class="control-label">Contact Number</label>
                     <input type="number" id="ContactNumber" name="ContactNumber" class="form-control"
                         [(ngModel)]='user.contactNumber' required #cn="ngModel" />
                     <div class="alert-danger" *ngIf="cn.errors && (cn.dirty || cn.touched)" style="padding:2px;">
                         <span *ngIf="cn.errors.required">Contact Number is required</span>
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group">
-                    <input [disabled]="!form.valid" class='btn btn-tomato' type="button" value="Register" (click)='add()'>
+                    <input [disabled]="!form.valid" class='btn btn-tomato' type="button" value="Register"
+                        (click)='add()'>
                 </div>
             </form>
         </div>

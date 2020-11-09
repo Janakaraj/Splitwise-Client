@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RegisterUserAC, UserAC, UserClient } from 'src/app/data.service';
 
 @Component({
   selector: 'app-register',
@@ -7,23 +8,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  userDetails: RegisterUserAC = new RegisterUserAC();
   user: any = {
-    id: 0,
-    email: null,
-    username: null,
-    fullname: null,
-    password: null,
-    contactNumber: null
+    userEmail: null,
+    userName: null,
+    userFullName: null,
+    userPassword: null
   };
-  constructor(private route: Router) { }
+  fieldTextType: boolean;
+  confirmPassword: string;
+  constructor(private route: Router, private userClient: UserClient) { }
 
   ngOnInit(): void {
   }
   add(): void {
-  //   this.employeeService.addEmployee(this.employee);
-  //    this.route.navigate(['/employee']).then(() => {
-  //      window.location.reload();
-  //   });
-   }
+    if (this.confirmPassword == this.user.userPassword) {
+      this.userDetails.init(this.user);
+      console.log(this.userDetails);
+      this.userClient.register(this.userDetails).subscribe(result => {
+        console.log("User registered successfully");
+        this.route.navigate(['/login']);
+      },
+        error => console.error(error));
+    }
+    else {
+      alert("Password and Confirm Password do not match");
+    }
+  }
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
 }

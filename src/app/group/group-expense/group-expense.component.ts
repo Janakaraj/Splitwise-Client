@@ -14,14 +14,14 @@ export class GroupExpenseComponent implements OnInit {
      private activatedRoute: ActivatedRoute, private payeeClient: PayeeClient, 
      private payerClient: PayerClient) { }
 
-  expenses: ExpenseAC[];
+  expenses : ExpenseAC[];
   payers : PayerAC[];
   payees : PayeeAC[];
-  groupId: number;
-  showIds: number[] = [];
-  groupName: string = "";
-  showExpenseCard: boolean = false;
-  ngOnInit(): void {
+  groupId : number;
+  showIds : number[] = [];
+  groupName : string = "";
+  showExpenseCard : boolean = false;
+  ngOnInit() : void {
     this.activatedRoute.paramMap.subscribe(e => {
       this.groupId = +e.get('id');
       this.getExpensesByGroupId(this.groupId);
