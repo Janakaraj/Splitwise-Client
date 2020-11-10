@@ -804,7 +804,7 @@ export class PayeeClient {
         return _observableOf<PayeeAC[]>(<any>null);
     }
 
-    getExpensesByPayeeId(payeeId: string | null): Observable<ExpenseAC[]> {
+    getExpensesByPayeeId(payeeId: string | null): Observable<PayeeAC[]> {
         let url_ = this.baseUrl + "/api/Payee/expenseByPayeeId/{payeeId}";
         if (payeeId === undefined || payeeId === null)
             throw new Error("The parameter 'payeeId' must be defined.");
@@ -826,14 +826,14 @@ export class PayeeClient {
                 try {
                     return this.processGetExpensesByPayeeId(<any>response_);
                 } catch (e) {
-                    return <Observable<ExpenseAC[]>><any>_observableThrow(e);
+                    return <Observable<PayeeAC[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ExpenseAC[]>><any>_observableThrow(response_);
+                return <Observable<PayeeAC[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetExpensesByPayeeId(response: HttpResponseBase): Observable<ExpenseAC[]> {
+    protected processGetExpensesByPayeeId(response: HttpResponseBase): Observable<PayeeAC[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -847,7 +847,7 @@ export class PayeeClient {
             if (Array.isArray(resultData200)) {
                 result200 = [] as any;
                 for (let item of resultData200)
-                    result200!.push(ExpenseAC.fromJS(item));
+                    result200!.push(PayeeAC.fromJS(item));
             }
             return _observableOf(result200);
             }));
@@ -856,7 +856,7 @@ export class PayeeClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ExpenseAC[]>(<any>null);
+        return _observableOf<PayeeAC[]>(<any>null);
     }
 
     putPayee(payeeid: string | null | undefined, expenseid: number | undefined, payee: PayeeAC, id: string): Observable<FileResponse | null> {
@@ -1090,7 +1090,7 @@ export class PayerClient {
         return _observableOf<PayerAC[]>(<any>null);
     }
 
-    getExpensesByPayerId(payerId: string | null): Observable<ExpenseAC[]> {
+    getExpensesByPayerId(payerId: string | null): Observable<PayerAC[]> {
         let url_ = this.baseUrl + "/api/Payer/expensesByPayerId/{payerId}";
         if (payerId === undefined || payerId === null)
             throw new Error("The parameter 'payerId' must be defined.");
@@ -1112,14 +1112,14 @@ export class PayerClient {
                 try {
                     return this.processGetExpensesByPayerId(<any>response_);
                 } catch (e) {
-                    return <Observable<ExpenseAC[]>><any>_observableThrow(e);
+                    return <Observable<PayerAC[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<ExpenseAC[]>><any>_observableThrow(response_);
+                return <Observable<PayerAC[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetExpensesByPayerId(response: HttpResponseBase): Observable<ExpenseAC[]> {
+    protected processGetExpensesByPayerId(response: HttpResponseBase): Observable<PayerAC[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1133,7 +1133,7 @@ export class PayerClient {
             if (Array.isArray(resultData200)) {
                 result200 = [] as any;
                 for (let item of resultData200)
-                    result200!.push(ExpenseAC.fromJS(item));
+                    result200!.push(PayerAC.fromJS(item));
             }
             return _observableOf(result200);
             }));
@@ -1142,7 +1142,7 @@ export class PayerClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<ExpenseAC[]>(<any>null);
+        return _observableOf<PayerAC[]>(<any>null);
     }
 
     putPayer(payerid: string | null | undefined, expenseid: number | undefined, payer: PayerAC, id: string): Observable<FileResponse | null> {
