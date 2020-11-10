@@ -8,16 +8,15 @@
                     <label for="Participents" class="control-label"> Choose Participents</label>
                     <div>
                         <span *ngFor="let participent of participents"
-                            class="badge badge-success">{{participent.userName}}&nbsp;<a (click)="selectSuggestion(participent)"><i class="fa fa-times" ></i></a></span>
+                            class="badge badge-success">{{participent.userName}}&nbsp;<a
+                                (click)="selectSuggestion(participent)"><i class="fa fa-times"></i></a></span>
                     </div>
 
                     <div class="card">
-                        <div class="card-body" *ngFor="let member of groupMembers" [ngClass]="isSelected(member) ? 'selection' : ''"><a
+                        <div class="card-body member-selct-list" *ngFor="let member of groupMembers"
+                            [ngClass]="isSelected(member) ? 'selection' : ''"><a
                                 (click)="selectSuggestion(member)">{{member.userFullName}}</a></div>
                     </div>
-                    <!-- <div class="alert-danger" *ngIf="dept.errors && (dept.dirty || dept.touched)" style="padding:2px;">
-                        <span *ngIf="dept.errors.required">Department is required</span>
-                    </div> -->
                 </div>
                 <div class="form-group">
                     <label for="ExpenseName" class="control-label">Expense name</label>
@@ -49,17 +48,20 @@
                         <span *ngIf="expenseTotalAmount.errors.required">Expense Total Amount is required</span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="PaidBy" class="control-label">PaidBy</label>
-                    <select id="PaidBy" name="PaidBy" class="form-control" [(ngModel)]='paidById'
-                        required #paidBy="ngModel">
-                        <option *ngFor='let member of groupMembers' [ngValue]="member.id">
-                            {{member.userFullName}}</option>
-                    </select>
-                    <div class="alert-danger" *ngIf="paidBy.errors && (paidBy.dirty || paidBy.touched)" style="padding:2px;">
-                        <span *ngIf="paidBy.errors.required">PaidBy is required</span>
+                <div class="card">
+                    <div class="card-body share">
+                        <h6 class="card-title">PaidBy & amount paid</h6>
+                        <div *ngFor='let participent of participents;let j = index;'>
+                            <label [for]="participent.userName" class="control-label">{{participent.userName}}</label>
+                            <input type="text" [id]="participent.id" [name]="participent.id" class="form-control"
+                                [(ngModel)]='payingUsers[j].id' required disabled hidden>
+                            <input type="text" [id]="participent.userName" [name]="participent.userName"
+                                class="form-control" [(ngModel)]='payingUsers[j].paid' required>
+                        </div>
                     </div>
                 </div>
+
+
                 <div class="form-group">
                     <label for="ExpenseDescription" class="control-label">Expense Description</label>
                     <input type="text" id="ExpenseDescription" name="ExpenseDescription" class="form-control"
@@ -71,13 +73,29 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="ExpenseSplitBy" class="control-label">Expense SplitBy</label>
-                    <input type="text" id="ExpenseSplitBy" name="ExpenseSplitBy" class="form-control"
-                        [(ngModel)]='expense.expenseSplitBy' required #expenseSplitBy="ngModel" />
+                    <label for="ExpenseSplitBy" class="control-label">SplitBy</label>
+                    <select id="ExpenseSplitBy" name="ExpenseSplitBy" class="form-control"
+                        [(ngModel)]='expense.expenseSplitBy' required #expenseSplitBy="ngModel">
+                        <option value="equal">Equaly</option>
+                        <option value="percentage">Percentage</option>
+                        <option value="manual">Manually</option>
+                    </select>
                     <div class="alert-danger"
                         *ngIf="expenseSplitBy.errors && (expenseSplitBy.dirty || expenseSplitBy.touched)"
                         style="padding:2px;">
                         <span *ngIf="expenseSplitBy.errors.required">Expense Splitby is required</span>
+                    </div>
+                </div>
+                <div *ngIf="expense.expenseSplitBy=='percentage' || expense.expenseSplitBy=='manual' " class="card">
+                    <div class="card-body share">
+                        <h6 class="card-title">Enter share</h6>
+                        <div *ngFor='let p of participents;let i = index;'>
+                            <label [for]="p.userFullName" class="control-label">{{p.userName}}</label>
+                            <input type="text" class="form-control" [id]="p.id" [name]="p.id"
+                                [(ngModel)]='participentShare[i].id' required disabled hidden>
+                            <input type="text" [id]="p.userFullName" [name]="p.userFullName" class="form-control"
+                                [(ngModel)]='participentShare[i].share' required>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">

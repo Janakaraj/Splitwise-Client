@@ -5,9 +5,9 @@
     margin-right: 0.1rem;
     margin-left: 0.1rem;
 }
-.card-body{
+.member-selct-list{
     padding:0.2rem !important;
 }
-.card-body:hover{
+.member-selct-list:hover{
     background-color: #ffe0cc;
 }
