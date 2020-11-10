@@ -20,6 +20,7 @@ import { ExpenseAddComponent } from './expense/expense-add/expense-add.component
 import { ExpenseEditComponent } from './expense/expense-edit/expense-edit.component';
 import { GroupExpenseComponent } from './group/group-expense/group-expense.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { AbsolutePipe } from './absolute.pipe';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
     ExpenseAddComponent,
     ExpenseEditComponent,
     GroupExpenseComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    AbsolutePipe
   ],
   imports: [
     BrowserModule,
