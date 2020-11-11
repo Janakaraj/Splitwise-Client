@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FriendClient, GroupAC, UserAC, UserGroupClient } from '../data.service';
+import { Router } from '@angular/router';
+import { FriendClient, GroupAC, GroupClient, UserAC, UserGroupClient } from '../data.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,8 @@ export class HomeComponent implements OnInit {
   groups: GroupAC[];
   friends: UserAC[];
   userid: string = localStorage.getItem("userId");
-  constructor(private usergroupClient: UserGroupClient, private friendClient: FriendClient) { }
+  constructor(private usergroupClient: UserGroupClient, private friendClient: FriendClient,
+     private groupClient: GroupClient, private router:Router) { }
   ngOnInit(): void {
     this.getGroupsByUserId(this.userid);
     this.getFreindsByUserId(this.userid);
@@ -21,10 +23,21 @@ export class HomeComponent implements OnInit {
     },
       error => console.error(error));
   }
-  getFreindsByUserId(userid: string){
-    this.friendClient.getFriends(userid).subscribe(result=>{
+  getFreindsByUserId(userid: string) {
+    this.friendClient.getFriends(userid).subscribe(result => {
       this.friends = result;
     },
-    error=>console.error(error));
+      error => console.error(error));
+  }
+  deleteGroup(groupId: number) {
+    if (confirm("Are you sure to delete this group")) {
+      this.groupClient.deleteGroup(groupId).subscribe(() => {
+        this.router.navigateByUrl(`/home/(dashboard//right:welcome)`)
+      .then(() => {
+        window.location.reload();
+      });
+      },
+        error => console.error(error));
+    }
   }
 }

@@ -6,7 +6,8 @@
             <div class="card" style="width: auto;">
                 <h6 class="card-title text-secondary"> Groups <a [routerLink]="[{outlets:{primary: ['addGroup'], right:['welcome']}}]"><span class="badge badge-secondary"><i class="fa fa-plus-square"></i> add</span></a></h6>
                 <div class="card-body">
-                  <p *ngFor="let group of groups" class="card-subtitle mb-2"><a class="text-tomato" [routerLink]="[{outlets: {primary: ['groupExpenses',group.groupId], right: ['listUser',group.groupId]}}]"><i class="fa fa-users"></i>&nbsp;&nbsp; {{group.groupName}}</a></p>
+                  <p *ngFor="let group of groups" class="card-subtitle mb-2"><a class="text-tomato" [routerLink]="[{outlets: {primary: ['groupExpenses',group.groupId], right: ['listUser',group.groupId]}}]"><i class="fa fa-users"></i>&nbsp;&nbsp; {{group.groupName}}</a>
+                    <span class="delete-group"><a (click)="deleteGroup(group.groupId)"><i class="fa fa-trash text-secondary"></i></a></span></p>
                 </div>
               </div>
               <div class="card" style="width: auto;">

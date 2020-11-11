@@ -51,7 +51,7 @@ export class GroupAddComponent implements OnInit {
         }
       }
       
-      this.router.navigateByUrl(`/home/(groupExpenses/${this.postedGroupId}//right:listUser/${this.postedGroupId}`)
+      this.router.navigateByUrl(`/home/(groupExpenses/${this.postedGroupId}//right:listUser/${this.postedGroupId})`)
       .then(() => {
         window.location.reload();
       });
