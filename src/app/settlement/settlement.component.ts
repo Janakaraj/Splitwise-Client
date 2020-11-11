@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ExpenseAC, ExpenseClient, GroupAC, PayeeClient, PayerClient, SettlementAC, SettlementClient, UserAC, UserGroupClient } from '../data.service';
 
 @Component({
@@ -9,7 +10,9 @@ import { ExpenseAC, ExpenseClient, GroupAC, PayeeClient, PayerClient, Settlement
 export class SettlementComponent implements OnInit {
   showExpenses: boolean = false;
 
-  constructor(private userGroupClient: UserGroupClient, private expenseClient: ExpenseClient, private payerClient: PayerClient, private payeeClient: PayeeClient, private settlementClient: SettlementClient) { }
+  constructor(private userGroupClient: UserGroupClient, private expenseClient: ExpenseClient,
+     private payerClient: PayerClient, private payeeClient: PayeeClient,
+      private settlementClient: SettlementClient, private router:Router) { }
   groupMembers: UserAC[] = [];
   userGroups: GroupAC[];
   groupExpenses: ExpenseAC[];
@@ -67,7 +70,10 @@ export class SettlementComponent implements OnInit {
     }
     this.settlementAC.init(settlementData);
     this.settlementClient.postSettlement(this.settlementAC).subscribe(()=>{
-      console.log("settlement added");
+      this.router.navigateByUrl(`/home/(settlementList/${this.groupId}//right:listUser/${this.groupId})`)
+      .then(() => {
+        window.location.reload();
+      });
     },
     error=>console.error(error));
   }

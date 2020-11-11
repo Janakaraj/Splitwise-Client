@@ -15,10 +15,12 @@ export class SettlementListComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(e => {
       this.groupId = +e.get('id');
-    });
+    },
+    error=>console.error(error));
     this.settlementClient.getSettlementsByGroupId(this.groupId).subscribe(result=>{
       this.settlementAC = result;
-    });
+    },
+    error=>console.error(error));
   }
 
 }
