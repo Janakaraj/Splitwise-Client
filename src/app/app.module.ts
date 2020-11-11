@@ -22,6 +22,7 @@ import { GroupExpenseComponent } from './group/group-expense/group-expense.compo
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AbsolutePipe } from './absolute.pipe';
 import { SettlementComponent } from './settlement/settlement.component';
+import { SettlementListComponent } from './settlement-list/settlement-list.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { SettlementComponent } from './settlement/settlement.component';
     GroupExpenseComponent,
     WelcomeComponent,
     AbsolutePipe,
-    SettlementComponent
+    SettlementComponent,
+    SettlementListComponent
   ],
   imports: [
     BrowserModule,

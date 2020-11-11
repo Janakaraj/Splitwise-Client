@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Gruop</th>
+        <th scope="col">Expense</th>
+        <th scope="col">Paid by</th>
+        <th scope="col">Paid to</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let settlement of settlementAC">
+        <td>{{settlement.group.groupName}}</td>
+        <td>{{settlement.settlementExpense.expenseName}}</td>
+        <td>{{settlement.userPaying.userName}}</td>
+        <td>{{settlement.userRecieving.userName}}</td>
+        <td>{{settlement.transactionAmount}}</td>
+      </tr>
+    </tbody>
+  </table>

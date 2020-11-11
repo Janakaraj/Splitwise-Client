@@ -1528,7 +1528,7 @@ export class SettlementClient {
         return _observableOf<SettlementAC>(<any>null);
     }
 
-    getSettlementsByGroupId(groupid: number): Observable<FileResponse | null> {
+    getSettlementsByGroupId(groupid: number): Observable<SettlementAC[]> {
         let url_ = this.baseUrl + "/api/Settlement/byGroupId/{groupid}";
         if (groupid === undefined || groupid === null)
             throw new Error("The parameter 'groupid' must be defined.");
@@ -1539,7 +1539,7 @@ export class SettlementClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -1550,34 +1550,40 @@ export class SettlementClient {
                 try {
                     return this.processGetSettlementsByGroupId(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse | null>><any>_observableThrow(e);
+                    return <Observable<SettlementAC[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse | null>><any>_observableThrow(response_);
+                return <Observable<SettlementAC[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetSettlementsByGroupId(response: HttpResponseBase): Observable<FileResponse | null> {
+    protected processGetSettlementsByGroupId(response: HttpResponseBase): Observable<SettlementAC[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(SettlementAC.fromJS(item));
+            }
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse | null>(<any>null);
+        return _observableOf<SettlementAC[]>(<any>null);
     }
 
-    getSettlementsByExpenseId(expenseid: number): Observable<FileResponse | null> {
+    getSettlementsByExpenseId(expenseid: number): Observable<SettlementAC[]> {
         let url_ = this.baseUrl + "/api/Settlement/byExpenseId/{expenseid}";
         if (expenseid === undefined || expenseid === null)
             throw new Error("The parameter 'expenseid' must be defined.");
@@ -1588,7 +1594,7 @@ export class SettlementClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -1599,31 +1605,37 @@ export class SettlementClient {
                 try {
                     return this.processGetSettlementsByExpenseId(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse | null>><any>_observableThrow(e);
+                    return <Observable<SettlementAC[]>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse | null>><any>_observableThrow(response_);
+                return <Observable<SettlementAC[]>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetSettlementsByExpenseId(response: HttpResponseBase): Observable<FileResponse | null> {
+    protected processGetSettlementsByExpenseId(response: HttpResponseBase): Observable<SettlementAC[]> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(SettlementAC.fromJS(item));
+            }
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse | null>(<any>null);
+        return _observableOf<SettlementAC[]>(<any>null);
     }
 
     postSettlement(settlement: SettlementAC): Observable<SettlementAC> {

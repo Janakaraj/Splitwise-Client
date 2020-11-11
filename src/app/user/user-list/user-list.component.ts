@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
 import { PayeeAC, PayeeClient, PayerAC, PayerClient, UserAC, UserGroupClient } from 'src/app/data.service';
 
 @Component({
@@ -83,7 +82,6 @@ export class UserListComponent implements OnInit {
         error => {
           console.error(error);
         });
-      
     }
   }
 }

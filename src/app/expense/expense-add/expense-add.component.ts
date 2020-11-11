@@ -34,7 +34,6 @@ export class ExpenseAddComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(e => {
       this.groupId = +e.get('id');
-      console.log(this.groupId);
     });
     this.usergroupClient.getUsersInGroup(this.groupId).subscribe(result => {
       this.groupMembers = result;
