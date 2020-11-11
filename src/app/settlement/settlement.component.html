@@ -1,0 +1,66 @@
+<div class="container">
+    <h2>Record a transaction</h2>
+    <hr />
+    <div class="row">
+        <div class="col">
+            <form #form="ngForm">
+                <div class="form-group">
+                    <label for="UserGroup" class="control-label">Group</label>
+                    <select id="UserGroup" name="UserGroup" class="form-control" [(ngModel)]='groupId'
+                        required #userGroup="ngModel" (ngModelChange)="getGroupExpenses()">
+                        <option *ngFor='let group of userGroups' [ngValue]="group.groupId">
+                            {{group.groupName}}</option>
+                    </select>
+                    <div class="alert-danger" *ngIf="userGroup.errors && (userGroup.dirty || userGroup.touched)" style="padding:2px;">
+                        <span *ngIf="userGroup.errors.required">This field is required</span>
+                    </div>
+                </div>
+                <div *ngIf="showExpenses" class="form-group">
+                    <label for="GroupExpense" class="control-label">Expense</label>
+                    <select id="GroupExpense" name="GroupExpense" class="form-control" [(ngModel)]='expenseId'
+                        required #groupExpense="ngModel" (ngModelChange)="getGroupMemebers()">
+                        <option *ngFor='let expense of groupExpenses' [ngValue]="expense.expenseId">
+                            {{expense.expenseName}}</option>
+                    </select>
+                    <div class="alert-danger" *ngIf="groupExpense.errors && (groupExpense.dirty || groupExpense.touched)" style="padding:2px;">
+                        <span *ngIf="groupExpense.errors.required">This field is required</span>
+                    </div>
+                </div>
+                <div *ngIf="showUsers" class="form-group">
+                    <label for="PayerUser" class="control-label">Paid to</label>
+                    <select id="PayerUser" name="PayerUser" class="form-control" [(ngModel)]='payTo'
+                        required #payerUser="ngModel">
+                        <option *ngFor='let payer of groupMembers' [ngValue]="payer.id">
+                            {{payer.userName}}</option>
+                    </select>
+                    <div class="alert-danger" *ngIf="payerUser.errors && (payerUser.dirty || payerUser.touched)" style="padding:2px;">
+                        <span *ngIf="payerUser.errors.required">This field is required</span>
+                    </div>
+                </div>
+                <div *ngIf="showUsers" class="form-group">
+                    <label for="PayingUser" class="control-label">Paid by</label>
+                    <select id="PayingUser" name="PayingUser" class="form-control" [(ngModel)]='paidBy'
+                        required #payingUser="ngModel">
+                        <option *ngFor='let payee of groupMembers' [ngValue]="payee.id">
+                            {{payee.userName}}</option>
+                    </select>
+                    <div class="alert-danger" *ngIf="payingUser.errors && (payingUser.dirty || payingUser.touched)" style="padding:2px;">
+                        <span *ngIf="payingUser.errors.required">This field is required</span>
+                    </div>
+                </div>
+                <div *ngIf="showUsers" class="form-group">
+                    <label for="Amount" class="control-label">Amount</label>
+                    <input type="number" id="Amount" name="Amount" class="form-control"
+                        [(ngModel)]='amount' required #pamount="ngModel" />
+                    <div class="alert-danger" *ngIf="pamount.errors && (pamount.dirty || pamount.touched)"
+                        style="padding:2px;">
+                        <span *ngIf="pamount.errors.required">Expense name is required</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input [disabled]="!form.valid" class='btn btn-tomato' type="button" value="Add" (click)='add()'>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

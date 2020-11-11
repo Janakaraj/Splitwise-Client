@@ -15,6 +15,7 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { GroupExpenseComponent } from './group/group-expense/group-expense.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { SettlementComponent } from './settlement/settlement.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'addGroup', component: GroupAddComponent },
       { path: 'welcome', component:WelcomeComponent, outlet:"right"},
       { path: 'listGroup', component: GroupListComponent },
+      { path: 'settlement', component: SettlementComponent },
       { path: 'editGroup/:id', component: GroupEditComponent },
       { path: 'addExpense/:id', component: ExpenseAddComponent },
       { path: 'listExpense', component: ExpenseListComponent },
