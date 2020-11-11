@@ -25,14 +25,15 @@ export class UserListComponent implements OnInit {
     this.userGroupClient.getUsersInGroup(id).subscribe(result => {
       this.groupMembers = result;
       this.getGroupBalanceData();
-      //this.calculateFinalBalance();
     },
       error => console.error(error));
   }
   getGroupBalanceData() {
-    this.usersBalance=[];
-    this.usersOwes=[];
+    this.usersBalance = [];
+    this.usersOwes = [];
     for (let j = 0; j < this.groupMembers.length; j++) {
+      this.allPayerExpenses=[];
+      this.allPayeeExpenses=[];
       this.payerClient.getExpensesByPayerId(this.groupMembers[j].id).subscribe(result => {
         this.allPayerExpenses = result;
         var totalPaid = 0;
@@ -41,7 +42,7 @@ export class UserListComponent implements OnInit {
         var id = "";
         var name = "";
         for (let i = 0; i < this.allPayerExpenses.length; i++) {
-          if(this.allPayerExpenses[i].expense.expenseGroupId == this.groupId){
+          if (this.allPayerExpenses[i].expense.expenseGroupId == this.groupId) {
             totalPaid = totalPaid + Number(this.allPayerExpenses[i].amountPaid);
             totalOwed = totalOwed + Number(this.allPayerExpenses[i].payerShare);
             id = this.allPayerExpenses[i].payerId;
@@ -61,18 +62,18 @@ export class UserListComponent implements OnInit {
           var id = "";
           var name = "";
           for (let i = 0; i < this.allPayeeExpenses.length; i++) {
-            if(this.allPayeeExpenses[i].expense.expenseGroupId == this.groupId){
+            if (this.allPayeeExpenses[i].expense.expenseGroupId == this.groupId) {
               totalOwed = totalOwed + Number(this.allPayeeExpenses[i].payeeShare);
               id = this.allPayeeExpenses[i].payeeId;
               name = this.allPayeeExpenses[i].payeeUser.userName;
             }
           }
-          this.usersBalance[j].balance = this.usersBalance[j].balance - totalOwed; 
           var userOwes = {
             id: id,
             totalOwed: totalOwed,
             userName: name
           }
+          
           this.usersOwes.push(userOwes);
         },
           error => {
