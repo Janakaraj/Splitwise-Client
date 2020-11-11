@@ -57,4 +57,12 @@ export class GroupExpenseComponent implements OnInit {
     },
       error => console.error(error));
   }
+  deleteExpense(expenseId:number){
+    if(confirm("Are you sure you want to delete this expense?")){
+      this.expenseClient.deleteExpense(expenseId).subscribe(()=>{
+        window.location.reload();
+      },
+      error=>console.error(error));
+    }
+  }
 }

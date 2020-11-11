@@ -25,6 +25,9 @@
                     <th>
                         Description
                     </th>
+                    <th>
+
+                    </th>
                 </tr>
             </thead>
             <tbody *ngFor="let expense of expenses" (click)="showCard(expense.expenseId)">
@@ -40,6 +43,11 @@
                     </td>
                     <td>
                         {{expense.expenseDescription}}
+                    </td>
+                    <td>
+                        <span>
+                            <a (click)="deleteExpense(expense.expenseId)"><i class="fa fa-trash text-secondary"></i></a>
+                        </span>
                     </td>
                 </tr>
                 <tr *ngIf="showIds.indexOf(expense.expenseId)!=-1">

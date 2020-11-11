@@ -30,3 +30,6 @@
 .expense-description{
     font-size: 0.7rem;
 }
+.fa:hover{
+    color:tomato !important;
+}
