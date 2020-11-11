@@ -1,0 +1,25 @@
+<div class="container">
+    <h2>Add new group</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-8">
+            <form #form="ngForm">
+                <div class="form-group">
+                    <label for="FriendsEmail" class="control-label">Choose your friends email</label>
+                    <select id="FriendsEmail" name="FriendsEmail" class="form-control" [(ngModel)]='friendEmail'
+                        required #friendsEmail="ngModel">
+                        <option *ngFor='let user of userList' [ngValue]="user.email">
+                            {{user.email}}</option>
+                    </select>
+                    <div class="alert-danger" *ngIf="friendsEmail.errors && (friendsEmail.dirty || friendsEmail.touched)" style="padding:2px;">
+                        <span *ngIf="friendsEmail.errors.required">Friends email is required to add friend</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <input [disabled]="!form.valid" class='btn btn-tomato' type="button" value="Add" (click)='add()'>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

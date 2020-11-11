@@ -10,13 +10,13 @@ import { GroupListComponent } from './group/group-list/group-list.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
-import { UserAddComponent } from './user/user-add/user-add.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { GroupExpenseComponent } from './group/group-expense/group-expense.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SettlementComponent } from './settlement/settlement.component';
 import { SettlementListComponent } from './settlement-list/settlement-list.component';
+import { FriendAddComponent } from './friend/friend-add/friend-add.component';
 
 
 const routes: Routes = [
@@ -24,19 +24,19 @@ const routes: Routes = [
     path: 'home', component: HomeComponent, children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'addUser', component: UserAddComponent },
-      { path: 'listUser/:id', component: UserListComponent, outlet: "right" },
       { path: 'editUser/:id', component: UserEditComponent },
       { path: 'addGroup', component: GroupAddComponent },
-      { path: 'welcome', component:WelcomeComponent, outlet:"right"},
+      { path: 'editGroup/:id', component: GroupEditComponent },
       { path: 'listGroup', component: GroupListComponent },
       { path: 'settlement', component: SettlementComponent },
       { path: 'settlementList/:id', component: SettlementListComponent },
-      { path: 'editGroup/:id', component: GroupEditComponent },
+      { path: 'addFriend', component: FriendAddComponent },
       { path: 'addExpense/:id', component: ExpenseAddComponent },
       { path: 'listExpense', component: ExpenseListComponent },
       { path: 'editExpense/:id', component: ExpenseEditComponent },
-      { path: 'groupExpenses/:id', component: GroupExpenseComponent }
+      { path: 'groupExpenses/:id', component: GroupExpenseComponent },
+      { path: 'listUser/:id', component: UserListComponent, outlet: "right" },
+      { path: 'welcome', component:WelcomeComponent, outlet:"right"}
     ]
   },
   { path: 'login', component: LoginComponent },
