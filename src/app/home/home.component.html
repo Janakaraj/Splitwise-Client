@@ -11,9 +11,10 @@
                 </div>
               </div>
               <div class="card" style="width: auto;">
-              <h6 class="card-title text-secondary">Friends <a [routerLink]="['/home/addGroup']"><span class="badge badge-secondary"><i class="fa fa-user-plus"></i> add</span></a></h6>
+              <h6 class="card-title text-secondary">Friends <a [routerLink]="[{outlets:{primary: ['addFriend'], right:['welcome']}}]"><span class="badge badge-secondary"><i class="fa fa-user-plus"></i> add</span></a></h6>
                 <div class="card-body">
-                  <p *ngFor="let friend of friends" class="card-subtitle mb-2 text-muted"><a class="text-tomato"><i class="fa fa-user"></i>&nbsp;&nbsp; {{friend.userName}}</a></p>
+                  <p *ngFor="let friend of friends" class="card-subtitle mb-2 text-muted"><a class="text-tomato"><i class="fa fa-user"></i>&nbsp;&nbsp; {{friend.userName}}</a>
+                    <span class="delete-group"><a (click)="removeFriend(friend.id)"><i class="fa fa-user-times text-secondary"></i></a></span></p>
                 </div>
               </div>
         </div>
