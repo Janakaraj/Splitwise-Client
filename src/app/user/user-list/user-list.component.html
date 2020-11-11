@@ -5,8 +5,8 @@
       <h6 class="card-title text-muted">Members :</h6>
       <div *ngFor="let member of usersBalance" class="card-subtitle mb-2 text-muted">
           <p class="text-muted">{{member.userName}} </p>
-          <p *ngIf="member.balance > 0" class="text-success"> Gets {{member.balance}}</p>
-          <p *ngIf="member.balance < 0" class="text-danger"> has to pay {{member.balance | absolute}}</p>
+          <p *ngIf="member.balance > 0" class="text-success"> Gets {{member.balance | number : '1.2-2'}}</p>
+          <p *ngIf="member.balance < 0" class="text-danger"> has to pay {{member.balance | absolute | number : '1.2-2'}}</p>
           <p *ngIf="member.balance == 0" class="text-danger"> Settled Up</p>
         </div>
     </div>
