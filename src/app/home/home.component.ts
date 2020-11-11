@@ -18,14 +18,12 @@ export class HomeComponent implements OnInit {
   getGroupsByUserId(userid: string) {
     this.usergroupClient.getUserGroups(userid).subscribe(result => {
       this.groups = result;
-      console.log(this.groups);
     },
       error => console.error(error));
   }
   getFreindsByUserId(userid: string){
     this.friendClient.getFriends(userid).subscribe(result=>{
       this.friends = result;
-      console.log(this.friends);
     },
     error=>console.error(error));
   }

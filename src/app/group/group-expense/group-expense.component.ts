@@ -32,7 +32,6 @@ export class GroupExpenseComponent implements OnInit {
   getExpensesByGroupId(id: number) {
     this.expenseClient.getexpensesByGroupId(id).subscribe(result => {
       this.expenses = result;
-      console.log(this.expenses);
     },
       error => console.error(error));
   }

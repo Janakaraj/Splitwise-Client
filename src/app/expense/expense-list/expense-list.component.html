@@ -3,8 +3,35 @@
         <h3>All Expenses
             <span class="top-button">
                 <a class="btn btn-tomato" [routerLink]="['/home/addExpense']">Add expense</a>
-                <a class="btn btn-tomato">Settle Up</a>
+                <a class="btn btn-tomato" [routerLink]="['/home',{outlets:{primary: ['settlement'], right:['welcome']}}]">Settle Up</a>
             </span>
         </h3>
     </div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Expense</th>
+            <th scope="col">Description</th>
+            <th scope="col">Role</th>
+            <th scope="col">Amount Paid</th>
+            <th scope="col">Share</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let payer of payerList">
+            <td>{{payer.expense.expenseName}}</td>
+            <td>{{payer.expense.expenseDescription}}</td>
+            <td class="text-tomato">Payer</td>
+            <td class="text-success">{{payer.amountPaid | absolute | number : '1.2-2'}}</td>
+            <td>{{payer.payerShare | absolute | number : '1.2-2'}}</td>
+          </tr>
+          <tr *ngFor="let payee of payeeList">
+            <td>{{payee.expense.expenseName}}</td>
+            <td>{{payee.expense.expenseDescription}}</td>
+            <td class="text-tomato">Payee</td>
+            <td>-</td>
+            <td>{{payee.payeeShare | absolute | number : '1.2-2'}}</td>
+          </tr>
+        </tbody>
+      </table>
 </div>
