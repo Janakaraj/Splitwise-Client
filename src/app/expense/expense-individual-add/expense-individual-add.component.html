@@ -1,0 +1,104 @@
+<div class="container">
+    <h2>Add new expense</h2>
+    <hr />
+    <div class="row">
+        <div class="col">
+            <form #form="ngForm">
+                <div class="form-group">
+                    <label for="ExpenseWithId" class="control-label">Expense with</label>
+                    <select id="ExpenseWithId" name="ExpenseWithId" class="form-control" [(ngModel)]='expenseWithUser'
+                        required #expenseWithId="ngModel" (ngModelChange)="addFriendToParticipents()">
+                        <option *ngFor='let friend of friendList' [ngValue]="friend">
+                            {{friend.userName}}</option>
+                    </select>
+                    <div class="alert-danger" *ngIf="expenseWithId.errors && (expenseWithId.dirty || expenseWithId.touched)" style="padding:2px;">
+                        <span *ngIf="expenseWithId.errors.required">This feild is required</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ExpenseName" class="control-label">Expense name</label>
+                    <input type="text" id="ExpenseName" name="ExpenseName" class="form-control"
+                        [(ngModel)]='expense.expenseName' required #expenseName="ngModel" />
+                    <div class="alert-danger" *ngIf="expenseName.errors && (expenseName.dirty || expenseName.touched)"
+                        style="padding:2px;">
+                        <span *ngIf="expenseName.errors.required">Expense name is required</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ExpenseCurrency" class="control-label">Expense Currency</label>
+                    <input type="text" id="ExpenseCurrency" name="ExpenseCurrency" class="form-control"
+                        [(ngModel)]='expense.expenseCurrency' required #expenseCurrency="ngModel" />
+                    <div class="alert-danger"
+                        *ngIf="expenseCurrency.errors && (expenseCurrency.dirty || expenseCurrency.touched)"
+                        style="padding:2px;">
+                        <span *ngIf="expenseCurrency.errors.required">Expense Splitby is required</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ExpenseTotalAmount" class="control-label">Expense Total Amount</label>
+                    <input type="number" id="ExpenseTotalAmount" name="ExpenseTotalAmount" class="form-control"
+                        [(ngModel)]='expense.expenseTotalAmount' required #expenseTotalAmount="ngModel" />
+                    <div class="alert-danger"
+                        *ngIf="expenseTotalAmount.errors && (expenseTotalAmount.dirty || expenseTotalAmount.touched)"
+                        style="padding:2px;">
+                        <span *ngIf="expenseTotalAmount.errors.required">Expense Total Amount is required</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body share">
+                        <h6 class="card-title">PaidBy & amount paid</h6>
+                        <div *ngFor='let pp of participents;let j = index;'>
+                            <label [for]="pp.userName" class="control-label">{{pp.userName}}</label>
+                            <input type="text" [id]="pp.id" [name]="pp.id" class="form-control"
+                                [(ngModel)]='payingUsers[j].id' required disabled hidden>
+                            <input type="text" [id]="pp.userName" [name]="pp.userName"
+                                class="form-control" [(ngModel)]='payingUsers[j].paid' required>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="ExpenseDescription" class="control-label">Expense Description</label>
+                    <input type="text" id="ExpenseDescription" name="ExpenseDescription" class="form-control"
+                        [(ngModel)]='expense.expenseDescription' required #expenseDescription="ngModel" />
+                    <div class="alert-danger"
+                        *ngIf="expenseDescription.errors && (expenseDescription.dirty || expenseDescription.touched)"
+                        style="padding:2px;">
+                        <span *ngIf="expenseDescription.errors.required">Expense description is required</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ExpenseSplitBy" class="control-label">SplitBy</label>
+                    <select id="ExpenseSplitBy" name="ExpenseSplitBy" class="form-control"
+                        [(ngModel)]='expense.expenseSplitBy' required #expenseSplitBy="ngModel">
+                        <option value="equal">Equaly</option>
+                        <option value="percentage">Percentage</option>
+                        <option value="manual">Manually</option>
+                    </select>
+                    <div class="alert-danger"
+                        *ngIf="expenseSplitBy.errors && (expenseSplitBy.dirty || expenseSplitBy.touched)"
+                        style="padding:2px;">
+                        <span *ngIf="expenseSplitBy.errors.required">Expense Splitby is required</span>
+                    </div>
+                </div>
+                <div *ngIf="expense.expenseSplitBy=='percentage' || expense.expenseSplitBy=='manual' " class="card">
+                    <div class="card-body share">
+                        <h6 class="card-title">Enter share</h6>
+                        <div *ngFor='let p of participents;let i = index;'>
+                            <label [for]="p.userFullName" class="control-label">{{p.userName}}</label>
+                            <input type="text" class="form-control" [id]="p.id" [name]="p.id"
+                                [(ngModel)]='participentShare[i].id' required disabled hidden>
+                            <input type="text" [id]="p.userFullName" [name]="p.userFullName" class="form-control"
+                                [(ngModel)]='participentShare[i].share' required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input [disabled]="!form.valid" class='btn btn-tomato' type="button" value="Add" (click)='add()'>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

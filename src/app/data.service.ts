@@ -1858,7 +1858,7 @@ export class UserClient {
         return _observableOf<UserAC[]>(<any>null);
     }
 
-    getUser(id: string | null): Observable<FileResponse | null> {
+    getUser(id: string | null): Observable<UserAC> {
         let url_ = this.baseUrl + "/api/User/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1869,7 +1869,7 @@ export class UserClient {
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
+                "Accept": "application/json"
             })
         };
 
@@ -1880,31 +1880,33 @@ export class UserClient {
                 try {
                     return this.processGetUser(<any>response_);
                 } catch (e) {
-                    return <Observable<FileResponse | null>><any>_observableThrow(e);
+                    return <Observable<UserAC>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<FileResponse | null>><any>_observableThrow(response_);
+                return <Observable<UserAC>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetUser(response: HttpResponseBase): Observable<FileResponse | null> {
+    protected processGetUser(response: HttpResponseBase): Observable<UserAC> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
             (<any>response).error instanceof Blob ? (<any>response).error : undefined;
 
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = UserAC.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<FileResponse | null>(<any>null);
+        return _observableOf<UserAC>(<any>null);
     }
 
     deleteUser(id: string | null): Observable<UserAC> {
@@ -2291,7 +2293,7 @@ export class ExpenseAC implements IExpenseAC {
     expenseId!: number;
     expenseName?: string | undefined;
     expenseTotalAmount!: number;
-    expenseGroupId!: number;
+    expenseGroupId?: number | undefined;
     expenseGroup?: GroupAC | undefined;
     expenseSplitBy?: string | undefined;
     expenseDescription?: string | undefined;
@@ -2353,7 +2355,7 @@ export interface IExpenseAC {
     expenseId: number;
     expenseName?: string | undefined;
     expenseTotalAmount: number;
-    expenseGroupId: number;
+    expenseGroupId?: number | undefined;
     expenseGroup?: GroupAC | undefined;
     expenseSplitBy?: string | undefined;
     expenseDescription?: string | undefined;

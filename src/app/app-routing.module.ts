@@ -17,6 +17,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { SettlementComponent } from './settlement/settlement.component';
 import { SettlementListComponent } from './settlement-list/settlement-list.component';
 import { FriendAddComponent } from './friend/friend-add/friend-add.component';
+import { ExpenseIndividualAddComponent } from './expense/expense-individual-add/expense-individual-add.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
       { path: 'settlementList/:id', component: SettlementListComponent },
       { path: 'addFriend', component: FriendAddComponent },
       { path: 'addExpense/:id', component: ExpenseAddComponent },
+      { path: 'addIndiviualExpense', component: ExpenseIndividualAddComponent },
       { path: 'listExpense', component: ExpenseListComponent },
       { path: 'editExpense/:id', component: ExpenseEditComponent },
       { path: 'groupExpenses/:id', component: GroupExpenseComponent },

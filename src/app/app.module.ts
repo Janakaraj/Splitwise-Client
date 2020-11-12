@@ -22,6 +22,7 @@ import { AbsolutePipe } from './absolute.pipe';
 import { SettlementComponent } from './settlement/settlement.component';
 import { SettlementListComponent } from './settlement-list/settlement-list.component';
 import { FriendAddComponent } from './friend/friend-add/friend-add.component';
+import { ExpenseIndividualAddComponent } from './expense/expense-individual-add/expense-individual-add.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { FriendAddComponent } from './friend/friend-add/friend-add.component';
     AbsolutePipe,
     SettlementComponent,
     SettlementListComponent,
-    FriendAddComponent
+    FriendAddComponent,
+    ExpenseIndividualAddComponent
   ],
   imports: [
     BrowserModule,
