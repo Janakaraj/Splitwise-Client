@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ExpenseAC, ExpenseClient, PayeeAC, PayeeClient, PayerAC, PayerClient, UserAC, UserGroupClient, UserGroupMapping } from 'src/app/data.service';
+import { ExpenseAC, ExpenseClient, PayeeAC, PayeeClient, PayerAC, PayerClient, UserAC, UserGroupClient, UserGroupMapping } from 'src/app/shared/data.service';
 
 @Component({
   selector: 'app-expense-add',

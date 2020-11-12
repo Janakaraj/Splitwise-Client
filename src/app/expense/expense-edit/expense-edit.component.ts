@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ExpenseAC, ExpenseClient } from 'src/app/data.service';
+import { ExpenseAC, ExpenseClient } from 'src/app/shared/data.service';
 
 @Component({
   selector: 'app-expense-edit',

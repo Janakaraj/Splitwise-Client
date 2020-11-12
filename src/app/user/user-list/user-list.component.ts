@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PayeeAC, PayeeClient, PayerAC, PayerClient, UserAC, UserGroupClient } from 'src/app/data.service';
+import { PayeeAC, PayeeClient, PayerAC, PayerClient, UserAC, UserGroupClient } from 'src/app/shared/data.service';
 
 @Component({
   selector: 'app-user-list',

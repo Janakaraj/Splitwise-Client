@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FriendClient, GroupAC, GroupClient, RemoveFriendAC, UserAC, UserGroupClient } from '../data.service';
+import { FriendClient, GroupAC, GroupClient, RemoveFriendAC, UserAC, UserGroupClient } from '../shared/data.service';
 
 @Component({
   selector: 'app-home',

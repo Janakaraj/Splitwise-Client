@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterUserAC, UserAC, UserClient } from 'src/app/data.service';
+import { RegisterUserAC, UserAC, UserClient } from 'src/app/shared/data.service';
 
 @Component({
   selector: 'app-register',

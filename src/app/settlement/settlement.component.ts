@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ExpenseAC, ExpenseClient, GroupAC, PayeeClient, PayerClient, SettlementAC, SettlementClient, UserAC, UserGroupClient } from '../data.service';
+import { ExpenseAC, ExpenseClient, GroupAC, PayeeClient, PayerClient, SettlementAC, SettlementClient, UserAC, UserGroupClient } from '../shared/data.service';
 
 @Component({
   selector: 'app-settlement',

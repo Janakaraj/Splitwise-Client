@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { FriendClient, GroupAC, GroupClient, IGroupAC, UserAC, UserGroupClient, UserGroupMapping } from 'src/app/data.service';
+import { FriendClient, GroupAC, GroupClient, IGroupAC, UserAC, UserGroupClient, UserGroupMapping } from 'src/app/shared/data.service';
 
 @Component({
   selector: 'app-group-add',

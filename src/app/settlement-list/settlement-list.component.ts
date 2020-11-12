@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SettlementAC, SettlementClient } from '../data.service';
+import { SettlementAC, SettlementClient } from '../shared/data.service';
 
 @Component({
   selector: 'app-settlement-list',

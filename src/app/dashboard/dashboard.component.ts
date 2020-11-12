@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PayeeAC, PayeeClient, PayerAC, PayerClient } from '../data.service';
+import { PayeeAC, PayeeClient, PayerAC, PayerClient } from '../shared/data.service';
 
 @Component({
   selector: 'app-dashboard',

@@ -18,7 +18,7 @@ import { ExpenseAddComponent } from './expense/expense-add/expense-add.component
 import { ExpenseEditComponent } from './expense/expense-edit/expense-edit.component';
 import { GroupExpenseComponent } from './group/group-expense/group-expense.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { AbsolutePipe } from './absolute.pipe';
+import { AbsolutePipe } from './shared/absolute.pipe';
 import { SettlementComponent } from './settlement/settlement.component';
 import { SettlementListComponent } from './settlement-list/settlement-list.component';
 import { FriendAddComponent } from './friend/friend-add/friend-add.component';

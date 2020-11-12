@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AddFriendAC, FriendClient, UserAC, UserClient } from 'src/app/data.service';
+import { AddFriendAC, FriendClient, UserAC, UserClient } from 'src/app/shared/data.service';
 
 @Component({
   selector: 'app-friend-add',

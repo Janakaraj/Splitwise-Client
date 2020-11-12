@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExpenseAC, PayeeAC, PayeeClient, PayerAC, PayerClient } from 'src/app/data.service';
+import { ExpenseAC, PayeeAC, PayeeClient, PayerAC, PayerClient } from 'src/app/shared/data.service';
 
 @Component({
   selector: 'app-expense-list',
