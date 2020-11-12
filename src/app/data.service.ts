@@ -2546,6 +2546,7 @@ export class PayeeAC implements IPayeeAC {
     payeeId?: string | undefined;
     payeeUser?: UserAC | undefined;
     payeeShare!: number;
+    payeeInitialShare!: number;
 
     constructor(data?: IPayeeAC) {
         if (data) {
@@ -2564,6 +2565,7 @@ export class PayeeAC implements IPayeeAC {
             this.payeeId = _data["payeeId"];
             this.payeeUser = _data["payeeUser"] ? UserAC.fromJS(_data["payeeUser"]) : <any>undefined;
             this.payeeShare = _data["payeeShare"];
+            this.payeeInitialShare = _data["payeeInitialShare"];
         }
     }
 
@@ -2582,6 +2584,7 @@ export class PayeeAC implements IPayeeAC {
         data["payeeId"] = this.payeeId;
         data["payeeUser"] = this.payeeUser ? this.payeeUser.toJSON() : <any>undefined;
         data["payeeShare"] = this.payeeShare;
+        data["payeeInitialShare"] = this.payeeInitialShare;
         return data; 
     }
 }
@@ -2593,6 +2596,7 @@ export interface IPayeeAC {
     payeeId?: string | undefined;
     payeeUser?: UserAC | undefined;
     payeeShare: number;
+    payeeInitialShare: number;
 }
 
 export class PayerAC implements IPayerAC {
@@ -2603,6 +2607,7 @@ export class PayerAC implements IPayerAC {
     payerUser?: UserAC | undefined;
     amountPaid!: number;
     payerShare!: number;
+    payerInitialShare!: number;
 
     constructor(data?: IPayerAC) {
         if (data) {
@@ -2622,6 +2627,7 @@ export class PayerAC implements IPayerAC {
             this.payerUser = _data["payerUser"] ? UserAC.fromJS(_data["payerUser"]) : <any>undefined;
             this.amountPaid = _data["amountPaid"];
             this.payerShare = _data["payerShare"];
+            this.payerInitialShare = _data["payerInitialShare"];
         }
     }
 
@@ -2641,6 +2647,7 @@ export class PayerAC implements IPayerAC {
         data["payerUser"] = this.payerUser ? this.payerUser.toJSON() : <any>undefined;
         data["amountPaid"] = this.amountPaid;
         data["payerShare"] = this.payerShare;
+        data["payerInitialShare"] = this.payerInitialShare;
         return data; 
     }
 }
@@ -2653,6 +2660,7 @@ export interface IPayerAC {
     payerUser?: UserAC | undefined;
     amountPaid: number;
     payerShare: number;
+    payerInitialShare: number;
 }
 
 export class SettlementAC implements ISettlementAC {

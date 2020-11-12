@@ -16,8 +16,8 @@
         <div *ngIf="member.id.length>0">
           <p class="text-muted">{{member.userName}} </p>
           <p class="text-danger"> has to pay {{member.totalOwed | absolute | number : '1.2-2'}}
+            <span *ngIf="member.totalOwed == 0" class="text-success"> Settled Up</span>
           </p>
-          <p *ngIf="member.totalOwed == 0" class="text-danger"> Settled Up</p>
         </div>
       </div>
     </div>

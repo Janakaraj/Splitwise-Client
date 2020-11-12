@@ -23,7 +23,7 @@
             <td>{{payer.expense.expenseDescription}}</td>
             <td class="text-tomato">Payer</td>
             <td class="text-success">{{payer.amountPaid | absolute | number : '1.2-2'}}</td>
-            <td>{{payer.payerShare | absolute | number : '1.2-2'}}</td>
+            <td>{{payer.payerInitialShare | absolute | number : '1.2-2'}}</td>
           </tr>
           <tr *ngFor="let payee of payeeList">
             <td>{{payee.expense.expenseName}}</td>

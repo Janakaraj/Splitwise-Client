@@ -99,7 +99,8 @@ export class ExpenseAddComponent implements OnInit {
       expense: null,
       payerId: payerId,
       payerUser: null,
-      payerShare: individualShare
+      payerShare: individualShare,
+      payerInitialShare : individualShare
     }
     this.payer.init(payerDetail);
     console.log(this.payer);
@@ -115,7 +116,8 @@ export class ExpenseAddComponent implements OnInit {
       expense: null,
       payeeId: payeeId,
       payeeUser: null,
-      payeeShare: individualShare
+      payeeShare: individualShare,
+      payeeInitialShare : individualShare
     }
     this.payee.init(payeeDetail);
     console.log(this.payee);

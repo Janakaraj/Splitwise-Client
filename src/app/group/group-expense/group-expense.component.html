@@ -66,11 +66,11 @@
                                 <div *ngFor="let payer of payers">
                                     <p class="col card-text"> {{payer.payerUser.userFullName | titlecase}} <span
                                             class="text-success">paid {{payer.amountPaid | currency:'INR'}}</span> and
-                                        <span class="text-tomato">owes {{payer.payerShare | currency:'INR'}}</span></p>
+                                        <span class="text-tomato">owes {{payer.payerInitialShare | currency:'INR'}}</span></p>
                                 </div>
                                 <div *ngFor="let payee of payees">
                                     <p class="col card-text"> {{payee.payeeUser.userFullName | titlecase}} owes <span
-                                            class="text-tomato">{{payee.payeeShare | currency:'INR'}}</span></p>
+                                            class="text-tomato">{{payee.payeeInitialShare | currency:'INR'}}</span></p>
                                 </div>
                             </div>
                         </div>
