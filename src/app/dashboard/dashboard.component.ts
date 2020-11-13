@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PayeeAC, PayeeClient, PayerAC, PayerClient } from '../shared/data.service';
+import { PayeeAC, PayeeClient, PayerAC, PayerClient, SettlementAC, SettlementClient } from '../shared/data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +15,9 @@ export class DashboardComponent implements OnInit {
   totalAmountPaid: number = 0;
   totalOwed: number = 0;
   totalShare: number;
-  constructor(private payerClient: PayerClient, private payeeClient: PayeeClient) { }
+  nonGroupExpenseId:number[] =[];
+  nonGroupSettlement:SettlementAC[]=[];
+  constructor(private payerClient: PayerClient, private payeeClient: PayeeClient, private settlementClient: SettlementClient) { }
 
   ngOnInit(): void {
     this.getExpenseData();
@@ -41,7 +43,30 @@ export class DashboardComponent implements OnInit {
         totalOwed = totalOwed + Number(this.payeeDetails[j].payeeShare);
       }
       this.totalOwed = this.totalOwed + totalOwed;
+      this.getNonGroupSettlements();
     },
     error=>console.error(error));
+  }
+  getNonGroupSettlements(){
+    for(let i=0;i<this.payeeDetails.length;i++){
+      if(this.payeeDetails[i].expense.expenseGroupId == null){
+        this.nonGroupExpenseId.push(this.payeeDetails[i].expenseId);
+      }
+    }
+    for(let i=0;i<this.payerDetails.length;i++){
+      if(this.payerDetails[i].expense.expenseGroupId == null){
+        this.nonGroupExpenseId.push(this.payerDetails[i].expenseId);
+      }
+      console.log(this.nonGroupExpenseId);
+    }
+    
+    for(let j=0;j<this.nonGroupExpenseId.length;j++){
+      this.settlementClient.getSettlementsByExpenseId(Number(this.nonGroupExpenseId[j])).subscribe(result=>{
+         this.nonGroupSettlement = result;
+         console.log(result);
+      },
+      error=>console.error(error));
+    }
+    
   }
 }

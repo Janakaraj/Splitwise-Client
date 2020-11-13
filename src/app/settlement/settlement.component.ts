@@ -87,7 +87,7 @@ export class SettlementComponent implements OnInit {
     this.settlementAC.init(settlementData);
     this.settlementClient.postSettlement(this.settlementAC).subscribe(() => {
       if(this.groupId == -1){
-        this.router.navigateByUrl(`/home/(listExpense//right:welcome)`)
+        this.router.navigateByUrl(`/home/(dashboard//right:welcome)`)
         .then(() => {
           window.location.reload();
         });

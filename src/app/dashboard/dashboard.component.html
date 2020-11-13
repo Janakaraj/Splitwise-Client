@@ -16,4 +16,26 @@
             </tr>
         </thead>
     </table>
+    <div *ngIf="nonGroupSettlement.length>0" class="container">
+        <h6>Non-group Settlement List</h6>
+        <table class="table">
+            <thead class="text-tomato">
+              <tr>
+                <th scope="col">Expense</th>
+                <th scope="col">Paid by</th>
+                <th scope="col">Paid to</th>
+                <th scope="col">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let settlement of nonGroupSettlement">
+                <td>{{settlement.settlementExpense.expenseName}}</td>
+                <td>{{settlement.userPaying.userName}}</td>
+                <td>{{settlement.userRecieving.userName}}</td>
+                <td>{{settlement.transactionAmount}}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      
 </div>
