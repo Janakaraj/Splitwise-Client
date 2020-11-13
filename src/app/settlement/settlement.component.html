@@ -8,6 +8,7 @@
                     <label for="UserGroup" class="control-label">Group</label>
                     <select id="UserGroup" name="UserGroup" class="form-control" [(ngModel)]='groupId'
                         required #userGroup="ngModel" (ngModelChange)="getGroupExpenses()">
+                        <option value=-1>Non-Group settlement</option>
                         <option *ngFor='let group of userGroups' [ngValue]="group.groupId">
                             {{group.groupName}}</option>
                     </select>
