@@ -57,16 +57,13 @@ export class DashboardComponent implements OnInit {
       if(this.payerDetails[i].expense.expenseGroupId == null){
         this.nonGroupExpenseId.push(this.payerDetails[i].expenseId);
       }
-      console.log(this.nonGroupExpenseId);
     }
     
     for(let j=0;j<this.nonGroupExpenseId.length;j++){
       this.settlementClient.getSettlementsByExpenseId(Number(this.nonGroupExpenseId[j])).subscribe(result=>{
          this.nonGroupSettlement = result;
-         console.log(result);
       },
       error=>console.error(error));
     }
-    
   }
 }
