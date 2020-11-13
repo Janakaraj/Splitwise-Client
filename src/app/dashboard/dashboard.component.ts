@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PayeeAC, PayeeClient, PayerAC, PayerClient, SettlementAC, SettlementClient } from '../shared/data.service';
+import { ExpenseAC, PayeeAC, PayeeClient, PayerAC, PayerClient, SettlementAC, SettlementClient } from '../shared/data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   totalOwed: number = 0;
   totalShare: number;
   nonGroupExpenseId:number[] =[];
+  nonGroupExpenses: ExpenseAC[]=[];
   nonGroupSettlement:SettlementAC[]=[];
   constructor(private payerClient: PayerClient, private payeeClient: PayeeClient, private settlementClient: SettlementClient) { }
 
@@ -50,11 +51,13 @@ export class DashboardComponent implements OnInit {
   getNonGroupSettlements(){
     for(let i=0;i<this.payeeDetails.length;i++){
       if(this.payeeDetails[i].expense.expenseGroupId == null){
+        //this.nonGroupExpenses.push(this.payeeDetails[i].expense);
         this.nonGroupExpenseId.push(this.payeeDetails[i].expenseId);
       }
     }
     for(let i=0;i<this.payerDetails.length;i++){
       if(this.payerDetails[i].expense.expenseGroupId == null){
+        //this.nonGroupExpenses.push(this.payeeDetails[i].expense);
         this.nonGroupExpenseId.push(this.payerDetails[i].expenseId);
       }
     }

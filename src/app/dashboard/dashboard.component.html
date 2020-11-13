@@ -16,7 +16,36 @@
             </tr>
         </thead>
     </table>
+    
     <div *ngIf="nonGroupSettlement.length>0" class="container">
+      <h6>Non-group expense List</h6>
+      <table class="table">
+        <thead class="text-tomato">
+          <tr>
+            <th scope="col">Expense</th>
+            <th scope="col">Description</th>
+            <th scope="col">Role</th>
+            <th scope="col">Amount Paid</th>
+            <th scope="col">Share</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let payer of payerDetails">
+            <td *ngIf="payer.expense.expenseGroupId == null">{{payer.expense.expenseName}}</td>
+            <td *ngIf="payer.expense.expenseGroupId == null">{{payer.expense.expenseDescription}}</td>
+            <td *ngIf="payer.expense.expenseGroupId == null" class="text-tomato">Payer</td>
+            <td *ngIf="payer.expense.expenseGroupId == null" class="text-success">{{payer.amountPaid | absolute | number : '1.2-2'}}</td>
+            <td *ngIf="payer.expense.expenseGroupId == null">{{payer.payerInitialShare | absolute | number : '1.2-2'}}</td>
+          </tr>
+          <tr *ngFor="let payee of payeeDetails">
+            <td *ngIf="payee.expense.expenseGroupId == null">{{payee.expense.expenseName}}</td>
+            <td *ngIf="payee.expense.expenseGroupId == null">{{payee.expense.expenseDescription}}</td>
+            <td *ngIf="payee.expense.expenseGroupId == null" class="text-tomato">Payee</td>
+            <td *ngIf="payee.expense.expenseGroupId == null">-</td>
+            <td *ngIf="payee.expense.expenseGroupId == null">{{payee.payeeShare | absolute | number : '1.2-2'}}</td>
+          </tr>
+        </tbody>
+      </table>
         <h6>Non-group Settlement List</h6>
         <table class="table">
             <thead class="text-tomato">
